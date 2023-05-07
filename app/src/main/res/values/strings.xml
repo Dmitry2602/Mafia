@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mafia</string>
+    <string name="tableOfContents">MAFIA</string>
+    <string name="makeGame">Создать игру</string>
+    <string name="rules">Правила игры</string>
+    <string name="settings">Настройки</string>
+</resources>
