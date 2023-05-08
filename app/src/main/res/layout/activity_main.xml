@@ -52,9 +52,9 @@
         android:text="@string/rules"
         android:textAppearance="@style/textStyle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/makeGame"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/makeGame"
         app:layout_constraintTop_toBottomOf="@+id/makeGame"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -68,9 +68,9 @@
         android:layout_marginTop="16dp"
         android:text="@string/settings"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonRules"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/buttonRules"
         app:layout_constraintTop_toBottomOf="@+id/buttonRules"
         app:layout_constraintVertical_bias="0.0" />
 
