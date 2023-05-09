@@ -7,4 +7,6 @@
     <string name="back">Назад</string>
     <string name="empty" />
     <string name="contentDescription">Введите Ваш ник</string>
+    <string name="startGame">Начать игру</string>
+    <string name="startMove">Начать ход</string>
 </resources>
