@@ -12,6 +12,15 @@
         android:theme="@style/Theme.Mafia"
         tools:targetApi="31">
         <activity
+            android:name=".gameMaker"
+            android:exported="false" />
+        <activity
+            android:name=".gameSettings"
+            android:exported="false" />
+        <activity
+            android:name=".gameRules"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

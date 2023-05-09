@@ -4,4 +4,7 @@
     <string name="makeGame">Создать игру</string>
     <string name="rules">Правила игры</string>
     <string name="settings">Настройки</string>
+    <string name="back">Назад</string>
+    <string name="empty" />
+    <string name="contentDescription">Введите Ваш ник</string>
 </resources>
