@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/black"
     android:layout_height="match_parent"
-    tools:context=".gameMaker">
+    tools:context=".GameMaker"
+    android:background="@color/black">
 
     <TextView
         android:id="@+id/gameName"
@@ -23,7 +23,7 @@
         app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.042"
+        app:layout_constraintVertical_bias="0.043"
         tools:ignore="TextSizeCheck" />
 
     <View
@@ -57,5 +57,78 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.894" />
+
+
+    <EditText
+        android:id="@+id/editTextText1"
+        style="@style/textStyle"
+        android:layout_width="330dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/sendbutton"
+        android:ems="10"
+        android:hint="@string/sendName"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gameName"
+        app:layout_constraintVertical_bias="0.199"
+        tools:ignore="LabelFor"
+        android:importantForAutofill="no" />
+
+    <Button
+        android:id="@+id/add_button"
+        style="@style/textStyle"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/roudbutton"
+        android:text="@string/buttonAdd"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonStartGame"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/buttonStartGame"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.857"
+        app:toggleCheckedStateOnClick="false" />
+
+    <ScrollView
+        android:layout_width="330dp"
+        android:layout_height="344dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextText1"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="@+id/editTextText1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498">
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            style="@style/textStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/sendbutton"
+            android:hint="@string/sendName"
+            android:orientation="vertical"
+            android:text="@string/sendName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.392"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextText1"
+            app:layout_constraintVertical_bias="0.022">
+
+            <!-- здесь будут размещаться поля EditText -->
+
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,15 +17,15 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun onClickButtonMakeGame(view: View){
-        val intent = Intent(this, gameMaker::class.java)
+        val intent = Intent(this, GameMaker::class.java)
         startActivity(intent)
     }
     fun onClickButtonRules(view: View){
-        val intent = Intent(this, gameRules::class.java)
+        val intent = Intent(this, GameRules::class.java)
         startActivity(intent)
     }
     fun onClickButtonSettings(view: View){
-        val intent = Intent(this,gameSettings::class.java)
+        val intent = Intent(this,GameSettings::class.java)
         startActivity(intent)
     }
 }

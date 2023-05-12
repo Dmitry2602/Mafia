@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mafia.databinding.ActivityDistributionRolesBinding
 
-class distributionRoles : AppCompatActivity() {
+class DistributionRoles : AppCompatActivity() {
     lateinit var binding: ActivityDistributionRolesBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

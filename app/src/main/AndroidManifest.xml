@@ -12,16 +12,16 @@
         android:theme="@style/Theme.Mafia"
         tools:targetApi="31">
         <activity
-            android:name=".distributionRoles"
+            android:name=".DistributionRoles"
             android:exported="false" />
         <activity
-            android:name=".gameMaker"
+            android:name=".GameMaker"
             android:exported="false" />
         <activity
-            android:name=".gameSettings"
+            android:name=".GameSettings"
             android:exported="false" />
         <activity
-            android:name=".gameRules"
+            android:name=".GameRules"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

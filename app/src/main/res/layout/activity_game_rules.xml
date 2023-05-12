@@ -5,20 +5,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".gameRules">
+    tools:context=".GameRules">
+
+    <TextView
+        android:id="@+id/gameName3"
+        style="@style/gameName"
+        android:layout_width="276dp"
+        android:layout_height="108dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="-14dp"
+        android:fontFamily="@font/inriaserifregular"
+        android:text="@string/tableOfContents"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042"
+        tools:ignore="TextSizeCheck" />
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="316dp"
+        android:layout_height="1dp"
+        android:background="@color/buttonColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameName3"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/closeRules"
-        style = "@style/textStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/textStyle"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:onClick="onClickCloseRules"
         android:text="@string/back"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021" />
+        app:layout_constraintVertical_bias="0.889" />
+
+    <ScrollView
+        android:layout_width="300dp"
+        android:layout_height="450dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498">
+
+        <TextView
+            android:id="@+id/textView_rules"
+
+            style="@style/textStyle"
+            android:background="@color/buttonColor"
+            android:layout_width="300dp"
+            android:layout_height="450dp"
+            android:gravity="center"
+            android:text="@string/rulesText"
+            android:textSize="16sp" />
+
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
