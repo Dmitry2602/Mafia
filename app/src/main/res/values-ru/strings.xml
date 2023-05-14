@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MAFIA</string>
+    <string name="settings">Настройки</string>
+    <string name="back">Назад</string>
+    <string name="startGame">Начать игру</string>
+    <string name="startTurn">Начать ход</string>
+    <string name="enterNameHint">Введите имя игрока</string>
+    <string name="createGame">Создать игру</string>
+    <string name="rules">Правила игры</string>
+</resources>

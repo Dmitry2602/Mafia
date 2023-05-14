@@ -1,15 +1,14 @@
 <resources>
-    <string name="app_name">Mafia</string>
+    <string name="app_name">MAFIA</string>
     <string name="tableOfContents">MAFIA</string>
-    <string name="makeGame">Создать игру</string>
-    <string name="rules">Правила игры</string>
-    <string name="settings">Настройки</string>
-    <string name="back">Назад</string>
+    <string name="createGame">Create game</string>
+    <string name="rules">Rules</string>
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
     <string name="empty" />
-    <string name="startGame">Начать игру</string>
-    <string name="startMove">Начать ход</string>
-    <string name="sendName">Введите ник</string>
-    <string name="buttonAdd">+</string>
+    <string name="startGame">Start game</string>
+    <string name="startTurn">Start turn</string>
+    <string name="enterNameHint">Enter player\'s name</string>
 
     <string name="rulesText">Играть в мафию интересно разным типам людей потому, что в ней есть два пути к выигрышу. Можно вычислять противников логически, запоминая их действия по ходу игры, сопоставляя с результатами голосования. А можно психологически давить на игроков, побуждая их делать ошибки, провоцировать, или просто внимательно наблюдать за их поведением, делая выводы и принимая решения.
         Здесь каждый может раскрыться в выпавшей ему роли по-своему.Можно быть тихим застенчивым мафиози,

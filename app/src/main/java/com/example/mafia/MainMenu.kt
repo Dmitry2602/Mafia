@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.view.View
 import com.example.mafia.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    lateinit var binding: ActivityMainBinding
+class MainMenu : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

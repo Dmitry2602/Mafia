@@ -6,7 +6,7 @@ import android.view.View
 import com.example.mafia.databinding.ActivityGameRulesBinding
 
 class GameRules : AppCompatActivity() {
-    lateinit var binding: ActivityGameRulesBinding
+    private lateinit var binding: ActivityGameRulesBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameRulesBinding.inflate(layoutInflater)

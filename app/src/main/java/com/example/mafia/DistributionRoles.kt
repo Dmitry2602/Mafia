@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.example.mafia.databinding.ActivityDistributionRolesBinding
 
 class DistributionRoles : AppCompatActivity() {
-    lateinit var binding: ActivityDistributionRolesBinding
+    private lateinit var binding: ActivityDistributionRolesBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDistributionRolesBinding.inflate(layoutInflater)

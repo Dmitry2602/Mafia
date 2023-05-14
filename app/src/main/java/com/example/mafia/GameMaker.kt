@@ -8,17 +8,18 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import com.example.mafia.databinding.ActivityGameMakerBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class GameMaker : AppCompatActivity() {
-    lateinit var binding: ActivityGameMakerBinding
+    private lateinit var binding: ActivityGameMakerBinding
     private lateinit var linearLayout: LinearLayout
-    private lateinit var addButton: Button
+    private lateinit var addButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameMakerBinding.inflate(layoutInflater)
         linearLayout = binding.linearLayout
-        addButton = binding.addButton
+        addButton = binding.buttonAdd
 
         addButton.setOnClickListener {
             addEditText()
@@ -38,7 +39,7 @@ class GameMaker : AppCompatActivity() {
         editText.layoutParams = params
        // linearLayout.addView(editText)
     }
-    fun onClickButtonStarGame(view: View){
+    fun onClickButtonStartGame(view: View){
         val intent = Intent(this, DistributionRoles::class.java)
         startActivity(intent)
     }
