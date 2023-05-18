@@ -1,9 +1,10 @@
-package com.example.mafia
+package com.example.mafia.start
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.example.mafia.multi.GameMaker
 import com.example.mafia.databinding.ActivityMainBinding
 
 class MainMenu : AppCompatActivity() {
@@ -25,7 +26,7 @@ class MainMenu : AppCompatActivity() {
         startActivity(intent)
     }
     fun onClickButtonSettings(view: View){
-        val intent = Intent(this,GameSettings::class.java)
+        val intent = Intent(this, GameSettings::class.java)
         startActivity(intent)
     }
 }

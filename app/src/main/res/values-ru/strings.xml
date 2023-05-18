@@ -8,4 +8,8 @@
     <string name="enterNameHint">Введите имя игрока</string>
     <string name="createGame">Создать игру</string>
     <string name="rules">Правила игры</string>
+    <string name="makeMultiGame">Создать игру</string>
+    <string name="ConnectMultiGame">Присоединиться</string>
+    <string name="sendNickname"> Введите ник</string>
+    <string name="playerCounter"><font size="22"> Введите количество игроков</font></string>
 </resources>

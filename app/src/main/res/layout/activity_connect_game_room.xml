@@ -7,6 +7,24 @@
     android:background="@color/backgroundGray"
     tools:context=".multi.GameMaker">
 
+    <Button
+        android:id="@+id/buttonConnectGame"
+        style="@style/textStyle"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="16dp"
+        android:onClick="onClickButtonCreateGameRoom"
+        android:text="@string/ConnectMultiGame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
     <TextView
         android:id="@+id/gameName"
         style="@style/gameName"
@@ -37,40 +55,41 @@
         app:layout_constraintStart_toStartOf="@+id/gameName"
         app:layout_constraintTop_toBottomOf="@+id/gameName" />
 
-    <Button
-        android:id="@+id/buttonStartGame"
+    <EditText
+        android:id="@+id/Nickname"
         style="@style/textStyle"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:text="@string/ConnectMultiGame"
-        android:onClick="onClickButtonConnectGame"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@drawable/sendbutton"
+        android:ems="10"
+        android:hint="@string/sendNickname"
+        android:inputType="text"
+        android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.461"
-        tools:ignore="TextSizeCheck" />
+        app:layout_constraintVertical_bias="0.254"
+        android:autofillHints="" />
 
-    <Button
-        android:id="@+id/buttonStartGame2"
+    <EditText
+        android:id="@+id/gameCode"
         style="@style/textStyle"
-        android:layout_width="320dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        android:onClick="onClickButtonCreateGameRoom"
-        android:text="@string/makeMultiGame"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:background="@drawable/sendbutton"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="@string/gameCode"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/buttonStartGame"
-        app:layout_constraintHorizontal_bias="0.437"
-        app:layout_constraintStart_toStartOf="@+id/buttonStartGame"
-        app:layout_constraintTop_toBottomOf="@+id/buttonStartGame"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintEnd_toEndOf="@+id/Nickname"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/Nickname"
+        app:layout_constraintTop_toBottomOf="@+id/Nickname"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
