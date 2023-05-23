@@ -1,8 +1,7 @@
-package com.example.mafia.start
+package com.example.mafia.commonActivities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import com.example.mafia.databinding.ActivityGameRulesBinding
 
 class GameRules : AppCompatActivity() {
@@ -11,8 +10,7 @@ class GameRules : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGameRulesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
-    }
 
-    fun onClickCloseRules(view: View) = finish()
+        binding.closeRules.setOnClickListener { finish() }
+    }
 }

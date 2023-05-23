@@ -18,5 +18,7 @@
     <string name="ConnectMultiGame">Connect</string>
     <string name="sendNickname">Enter nickname</string>
     <string name="playerCounter"><font size="12">Enter the number\n of players</font></string>
-    <string name="gameCode">Введите код для игры</string>
+    <string name="gameCode" translatable="false">Введите код для игры</string>
+    <string name="localGame">Local game</string>
+    <string name="multiplayerGame">Multiplayer</string>
 </resources>

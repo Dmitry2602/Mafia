@@ -6,7 +6,7 @@
     </style >
     <style name="textStyle">
         <item name="android:fontFamily">@font/bookmanoldstyle</item>
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="backgroundTint">@color/buttonColor</item>
         <item name="android:textAllCaps">false</item>

@@ -1,4 +1,4 @@
-package com.example.mafia.multi
+package com.example.mafia.multiplayerActivities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

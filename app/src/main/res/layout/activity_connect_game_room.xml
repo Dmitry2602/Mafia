@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundGray"
-    tools:context=".multi.GameMaker">
+    tools:context=".multiplayerActivities.MultiplayerMenu">
 
     <Button
         android:id="@+id/buttonConnectGame"

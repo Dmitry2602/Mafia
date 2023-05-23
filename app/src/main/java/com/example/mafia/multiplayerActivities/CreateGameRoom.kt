@@ -1,9 +1,8 @@
-package com.example.mafia.multi
+package com.example.mafia.multiplayerActivities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
-import com.example.mafia.R
 import com.example.mafia.databinding.ActivityCreateGameRoomBinding
 
 class CreateGameRoom : AppCompatActivity() {

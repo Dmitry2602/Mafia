@@ -12,4 +12,6 @@
     <string name="ConnectMultiGame">Присоединиться</string>
     <string name="sendNickname"> Введите ник</string>
     <string name="playerCounter"><font size="22"> Введите количество игроков</font></string>
+    <string name="localGame">Локальная игра</string>
+    <string name="multiplayerGame">Сетевая игра</string>
 </resources>

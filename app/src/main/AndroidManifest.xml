@@ -11,29 +11,28 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
-        android:supportsRtl="true"
         android:theme="@style/Theme.Mafia"
         tools:targetApi="31" >
         <activity
-            android:name=".multi.ConnectGameRoom"
+            android:name=".multiplayerActivities.ConnectGameRoom"
             android:exported="false" />
         <activity
-            android:name=".multi.CreateGameRoom"
+            android:name=".multiplayerActivities.CreateGameRoom"
             android:exported="false" />
         <activity
             android:name=".DistributionRoles"
             android:exported="false" />
         <activity
-            android:name=".multi.GameMaker"
+            android:name=".multiplayerActivities.MultiplayerMenu"
             android:exported="false" />
         <activity
-            android:name=".start.GameSettings"
+            android:name=".commonActivities.GameSettings"
             android:exported="false" />
         <activity
-            android:name=".start.GameRules"
+            android:name=".commonActivities.GameRules"
             android:exported="false" />
         <activity
-            android:name=".start.MainMenu"
+            android:name=".commonActivities.MainMenu"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

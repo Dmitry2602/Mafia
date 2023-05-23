@@ -1,20 +1,18 @@
-package com.example.mafia.multi
+package com.example.mafia.multiplayerActivities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.mafia.databinding.ActivityGameMakerBinding
+import com.example.mafia.databinding.ActivityMultiplayerMenuBinding
 
-class GameMaker : AppCompatActivity() {
-    private lateinit var binding: ActivityGameMakerBinding
+class MultiplayerMenu : AppCompatActivity() {
+    private lateinit var binding: ActivityMultiplayerMenuBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityGameMakerBinding.inflate(layoutInflater)
-
+        binding = ActivityMultiplayerMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide()
     }
     fun onClickButtonCreateGameRoom(view: View){
         val intent = Intent(this, CreateGameRoom::class.java)
