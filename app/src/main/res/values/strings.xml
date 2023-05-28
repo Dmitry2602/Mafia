@@ -15,10 +15,11 @@
         не привлекающим внимание, можно быть громким обличающим мирным жителем, подозревающим и провоцирующем всех и вся. Можно наоборот. Игровая ситуация легко меняется, и тот игрок, которого только что обвиняли и почти отправили на «смерть», может одним удачным аргументом заставить команду поверить в виновность своего противника. Или спокойный мирный житель, в невиновности которого никто не сомневается, вдруг подвергается психологической атаке, теряется и вызывает на себя подозрение команды.
         Мафия — азартная, яркая игра, развивается непредсказуемо и держит в напряжении всех участников.</string>
     <string name="makeMultiGame">Make game</string>
-    <string name="ConnectMultiGame">Connect</string>
-    <string name="sendNickname">Enter nickname</string>
     <string name="playerCounter"><font size="12">Enter the number\n of players</font></string>
-    <string name="gameCode" translatable="false">Введите код для игры</string>
     <string name="localGame">Local game</string>
     <string name="multiplayerGame">Multiplayer</string>
+    <string name="dialogRegistrationHint">Enter your nickname</string>
+    <string name="registration">Registration</string>
+    <string name="toRegister">Done</string>
+    <string name="connectMultiplayer">Connect</string>
 </resources>

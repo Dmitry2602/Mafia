@@ -11,4 +11,10 @@
         <item name="backgroundTint">@color/buttonColor</item>
         <item name="android:textAllCaps">false</item>
     </style>
+    <style name="RegistrationDialog" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:minWidth">200dp</item>
+        <item name="android:colorAccent">@color/buttonColor</item>
+        <item name="android:background">@color/backgroundGray</item>
+    </style>
+
 </resources>

@@ -14,12 +14,6 @@
         android:theme="@style/Theme.Mafia"
         tools:targetApi="31" >
         <activity
-            android:name=".multiplayerActivities.ConnectGameRoom"
-            android:exported="false" />
-        <activity
-            android:name=".multiplayerActivities.CreateGameRoom"
-            android:exported="false" />
-        <activity
             android:name=".DistributionRoles"
             android:exported="false" />
         <activity

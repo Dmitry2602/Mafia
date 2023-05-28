@@ -1,10 +1,10 @@
 package com.example.mafia.multiplayerActivities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import com.example.mafia.databinding.ActivityMultiplayerMenuBinding
+
+//lateinit var preferences: SharedPreferences
 
 class MultiplayerMenu : AppCompatActivity() {
     private lateinit var binding: ActivityMultiplayerMenuBinding
@@ -12,15 +12,9 @@ class MultiplayerMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMultiplayerMenuBinding.inflate(layoutInflater)
+        //preferences = getSharedPreferences("TABLE", Context.MODE_PRIVATE)
+       // binding.textView2.text = preferences.getString("USERNAME", "лох")
         setContentView(binding.root)
     }
-    fun onClickButtonCreateGameRoom(view: View){
-        val intent = Intent(this, CreateGameRoom::class.java)
-        startActivity(intent)
-    }
 
-    fun onClickButtonConnectGame(view: View){
-        val intent = Intent(this, ConnectGameRoom::class.java)
-        startActivity(intent)
-    }
 }

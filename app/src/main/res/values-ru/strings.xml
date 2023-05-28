@@ -9,9 +9,11 @@
     <string name="createGame">Создать игру</string>
     <string name="rules">Правила игры</string>
     <string name="makeMultiGame">Создать игру</string>
-    <string name="ConnectMultiGame">Присоединиться</string>
-    <string name="sendNickname"> Введите ник</string>
     <string name="playerCounter"><font size="22"> Введите количество игроков</font></string>
     <string name="localGame">Локальная игра</string>
     <string name="multiplayerGame">Сетевая игра</string>
+    <string name="dialogRegistrationHint">Введите свой псевдоним</string>
+    <string name="registration">Регистрация</string>
+    <string name="toRegister">Готово</string>
+    <string name="connectMultiplayer">Присоедениться</string>
 </resources>
