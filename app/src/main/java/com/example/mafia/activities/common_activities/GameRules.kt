@@ -1,4 +1,4 @@
-package com.example.mafia.commonActivities
+package com.example.mafia.activities.common_activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

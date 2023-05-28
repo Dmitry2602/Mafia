@@ -22,4 +22,5 @@
     <string name="registration">Registration</string>
     <string name="toRegister">Done</string>
     <string name="connectMultiplayer">Connect</string>
+    <string name="registrationHint">This is required for multiplayer</string>
 </resources>

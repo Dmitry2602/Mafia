@@ -16,4 +16,5 @@
     <string name="registration">Регистрация</string>
     <string name="toRegister">Готово</string>
     <string name="connectMultiplayer">Присоедениться</string>
+    <string name="registrationHint">Это необходимо для сетевой игры</string>
 </resources>

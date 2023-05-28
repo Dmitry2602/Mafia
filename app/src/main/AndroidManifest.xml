@@ -17,16 +17,16 @@
             android:name=".DistributionRoles"
             android:exported="false" />
         <activity
-            android:name=".multiplayerActivities.MultiplayerMenu"
+            android:name=".activities.multiplayer_activities.MultiplayerMenu"
             android:exported="false" />
         <activity
-            android:name=".commonActivities.GameSettings"
+            android:name=".activities.common_activities.GameSettings"
             android:exported="false" />
         <activity
-            android:name=".commonActivities.GameRules"
+            android:name=".activities.common_activities.GameRules"
             android:exported="false" />
         <activity
-            android:name=".commonActivities.MainMenu"
+            android:name=".activities.common_activities.MainMenu"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundGray"
-    tools:context=".commonActivities.GameSettings">
+    tools:context=".activities.common_activities.GameSettings">
 
     <Button
         android:id="@+id/buttonClose"

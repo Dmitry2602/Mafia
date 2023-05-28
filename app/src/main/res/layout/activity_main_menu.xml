@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundGray"
     android:backgroundTint="#232323"
-    tools:context=".commonActivities.MainMenu">
+    tools:context=".activities.common_activities.MainMenu">
 
     <Button
         android:id="@+id/buttonMultiplayerGame"

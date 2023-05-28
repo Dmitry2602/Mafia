@@ -17,27 +17,27 @@
         android:textSize="30sp" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textViewHint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:gravity="center_horizontal"
         android:background="#3C3C3C"
+        android:gravity="center_horizontal"
         android:paddingTop="5dp"
         android:paddingBottom="10dp"
-        android:text="Это необходимо для сетевой игры!"
+        android:text="@string/dialogRegistrationHint"
         android:textSize="14sp" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/editTextUsername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
-        android:autofillHints=""
         android:hint="@string/dialogRegistrationHint"
-        android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:selectAllOnFocus="false"
+        android:singleLine="true" />
 </LinearLayout>
