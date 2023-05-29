@@ -23,6 +23,7 @@ class MainMenu : AppCompatActivity() {
         setContentView(binding.root)
 
         preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
+        preferences.getString(Preferences.USERNAME_TAG, null)
         if (!preferences.contains(Preferences.USERNAME_TAG)) {
             val registrationDialog = RegistrationDialogFragment()
             registrationDialog.isCancelable = false

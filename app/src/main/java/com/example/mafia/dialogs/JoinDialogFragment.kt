@@ -2,14 +2,28 @@ package com.example.mafia.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.os.Bundle
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
-import com.example.mafia.Preferences
 import com.example.mafia.R
-import com.example.mafia.activities.common_activities.preferences
 
-class RegistrationDialogFragment : DialogFragment() {
+class JoinDialogFragment : DialogFragment() {
+    private lateinit var listener: JoinDialogListener
+
+    interface JoinDialogListener {
+        fun sendCode(code: String)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            listener = context as JoinDialogListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException("$context must implement NoticeDialogListener")
+        }
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext(), R.style.RegistrationDialog)
         val inflater = requireActivity().layoutInflater.inflate(R.layout.dialog_registration, null)
@@ -17,11 +31,10 @@ class RegistrationDialogFragment : DialogFragment() {
         return builder
             .setView(inflater)
             .setPositiveButton(R.string.toRegister) { _, _ ->
-                val username = editText.text.toString()
-                val editor = preferences.edit()
-                editor.putString(Preferences.USERNAME_TAG, username)
-                editor.apply()
+                val code = editText.text.toString()
+                listener.sendCode(code)
             }
+            .setNegativeButton("Закрыть") { _, _ -> }
             .create()
     }
 }
