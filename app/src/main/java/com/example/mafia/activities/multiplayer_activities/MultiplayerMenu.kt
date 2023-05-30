@@ -33,4 +33,6 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
     override fun sendCode(code: String) {
         receivedCode = code
     }
+
+    fun onClickCloseRules(view: View) {}
 }
