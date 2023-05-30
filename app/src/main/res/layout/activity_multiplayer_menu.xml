@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray"
+    android:background="@color/backgroundGray"
     tools:context=".activities.multiplayer_activities.MultiplayerMenu">
 
     <ImageView
@@ -29,26 +29,27 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
-        android:background="@color/cream_gray"
+        android:background="@color/buttonColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
 
     <TextView
-        android:id="@+id/textView"
-        style="@style/common_text"
+        android:id="@+id/codeRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/buttonMultiplayerGame"
+        android:text="@string/multiplayerGame"
         android:textAlignment="center"
+        android:textAppearance="@style/textStyle"
+        android:textColor="@color/buttonColor"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
 
     <Button
         android:id="@+id/buttonStartGame"
-        style="@style/button_text"
+        style="@style/textStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -61,17 +62,17 @@
         android:onClick="onClickButtonJoinGame"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="@string/buttonJoinGame"
+        android:text="@string/connectMultiplayer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/codeRoom"
         app:layout_constraintVertical_bias="0.4" />
 
     <Button
         android:id="@+id/buttonCreateGame"
-        style="@style/button_text"
+        style="@style/textStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -83,7 +84,7 @@
         android:onClick="onClickButtonCreateGame"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="@string/buttonCreateGame"
+        android:text="@string/makeMultiGame"
         app:layout_constraintEnd_toEndOf="@+id/buttonStartGame"
         app:layout_constraintStart_toStartOf="@+id/buttonStartGame"
         app:layout_constraintTop_toBottomOf="@+id/buttonStartGame" />
