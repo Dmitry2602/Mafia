@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray"
+    android:background="@color/backgroundGray"
     tools:context=".activities.common_activities.GameSettings">
 
     <Button
         android:id="@+id/buttonClose"
-        style="@style/button_text"
+        style="@style/textStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClickCloseSettings"
-        android:text="@string/buttonBack"
+        android:text="@string/back"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

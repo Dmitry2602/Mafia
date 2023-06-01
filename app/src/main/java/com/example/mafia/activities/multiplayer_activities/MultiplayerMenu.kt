@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerMenuBinding
@@ -16,10 +18,17 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListener {
-    lateinit var receivedCode: String
+    private lateinit var buttonStartGame: Button
     private lateinit var binding: ActivityMultiplayerMenuBinding
     private lateinit var roomId: String
-    private lateinit var databaseReference: DatabaseReference
+    private lateinit var currentPlayerId: String
+    private lateinit var nick: String
+
+    private lateinit var database: FirebaseDatabase
+    private lateinit var playersRef: DatabaseReference
+    private lateinit var gameStatusRef: DatabaseReference
+    private lateinit var roundNumberRef: DatabaseReference
+    private lateinit var currentPlayerIdRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,44 +36,33 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
         setContentView(binding.root)
 
         roomId = intent.getStringExtra("roomCode") ?: ""
-        databaseReference = FirebaseDatabase.getInstance().reference
 
-        // Проверяем, является ли текущий пользователь уже участником комнаты
-        checkIfAlreadyJoined()
-    }
+        // Инициализация базы данных и ссылки Firebase
+        database = FirebaseDatabase.getInstance()
+        playersRef = database.reference.child("rooms").child(roomId).child("players")
+        gameStatusRef = database.reference.child("rooms").child(roomId).child("gameStatus")
+        roundNumberRef = database.reference.child("rooms").child(roomId).child("roundNumber")
+        currentPlayerIdRef = database.reference.child("rooms").child(roomId).child("currentPlayerId")
 
-    private fun checkIfAlreadyJoined() {
-        val nick = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
-            .getString(Preferences.USERNAME_TAG, null).toString()
 
-        databaseReference.child("rooms").child("players")
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val players = dataSnapshot.children
-                    var alreadyJoined = false
+        val preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
+        nick = preferences.getString(Preferences.USERNAME_TAG, null).toString()
 
-                    for (playerSnapshot in players) {
-                        val playerNickname = playerSnapshot.getValue(String::class.java)
-                        if (playerNickname == nick) {
-                            alreadyJoined = true
-                            break
-                        }
-                    }
+        // создание класса игрока
+        val creatorPlayer = Player("", nick, Player.Role.Unknown, true, "")
 
-                    if (alreadyJoined) {
-                        // Пользователь уже присоединен к комнате
-                        // Выполните необходимые действия, например, отобразите экран комнаты
-                    } else {
-                        // Пользователь еще не присоединился к комнате
-                        // Выполните необходимые действия, например, отобразите диалоговое окно для ввода кода комнаты
-                        //showJoinDialog()
-                    }
-                }
+        val creatorPlayerId = playersRef.push().key ?: ""
+        creatorPlayer.playerId = creatorPlayerId
+        playersRef.child(creatorPlayerId).setValue(creatorPlayer)
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Обработка ошибки, если такая имеется
-                }
-            })
+        currentPlayerId = creatorPlayerId
+
+        buttonStartGame = binding.buttonStartGame
+
+        buttonStartGame.setOnClickListener {
+            val joinDialog = JoinDialogFragment()
+            joinDialog.show(supportFragmentManager, "JoinDialog")
+        }
     }
 
     private fun showJoinDialog() {
@@ -72,39 +70,37 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
         joinDialog.show(supportFragmentManager, "JoinDialog")
     }
 
-    override fun sendCode(code: String) {
-        // Пользователь ввел код комнаты в диалоговом окне
-        // Выполните действия для присоединения к комнате с указанным кодом
-        val nick = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
-            .getString(Preferences.USERNAME_TAG, null).toString()
-
-        val playerData: HashMap<String, Any> = HashMap()
-        playerData["nickname"] = nick
-
-        databaseReference.child("rooms").child("players")
-            .push().setValue(playerData) { databaseError, _ ->
-                if (databaseError == null) {
-                    // Присоединение к комнате прошло успешно
-                    // Выполните необходимые действия, например, отобразите экран комнаты
-                } else {
-                    // Произошла ошибка при присоединении к комнате
-                    // Обработайте ошибку соединения с базой данных
-                }
-            }
-    }
-
-    fun onClickButtonCreateGame(view: View){
+    fun onClickButtonCreateGame(view: View) {
         val intent = Intent(this, MultiplayerRoom::class.java)
         startActivity(intent)
     }
-    fun onClickButtonJoinGame(view: View){
-        val joinDialog = JoinDialogFragment()
-        joinDialog.isCancelable = false
-        val dialogManager = supportFragmentManager
-        joinDialog.show(dialogManager, "JOIN")
+
+    fun onClickButtonJoinGame(view: View) {
+        showJoinDialog()
     }
 
-    /*override fun sendCode(code: String) {
-        receivedCode = code
-    }*/
+    override fun sendCode(code: String) {
+        val enteredCode = code
+        val roomRef = database.reference.child("rooms").child(enteredCode).child("players")
+
+        roomRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // подключение игрока в комнату, если код верный
+                    val player = Player("", nick, Player.Role.Unknown, true, "")
+                    val playerId = roomRef.push().key ?: ""
+                    player.playerId = playerId
+                    roomRef.child(playerId).setValue(player)
+                    Toast.makeText(applicationContext, "Player added to the room", Toast.LENGTH_SHORT).show()
+                } else {
+                    // ошибка, если код неверный
+                    Toast.makeText(applicationContext, "Invalid room code", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        })
+    }
 }
