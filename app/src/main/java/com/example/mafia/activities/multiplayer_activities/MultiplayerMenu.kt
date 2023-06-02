@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
+import com.example.mafia.Player
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerMenuBinding
 import com.example.mafia.dialogs.JoinDialogFragment

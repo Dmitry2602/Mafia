@@ -4,32 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundGray"
+    android:background="@color/background_gray"
     tools:context=".activities.common_activities.GameSettings">
 
-    <Button
-        android:id="@+id/buttonClose"
-        style="@style/textStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickCloseSettings"
-        android:text="@string/back"
-        android:textSize="14sp"
+    <ImageView
+        android:id="@+id/imageViewTitle"
+        android:layout_width="0dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="70dp"
+        android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/title" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <View
+        android:id="@+id/viewHorizontalLine"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="50dp"
+        android:background="@color/cream_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
+
+    <TextView
+        android:id="@+id/codeRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/buttonSetting"
+        android:textAlignment="center"
+        android:textAppearance="@style/common_text"
+        android:textColor="@color/cream_gray"
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
+        app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="309dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="@string/dialogHintRegistration"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
+        app:layout_constraintTop_toBottomOf="@+id/codeRoom" />
+
+    <Button
+        android:id="@+id/closeRules"
+        style="@style/button_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="32dp"
+        android:onClick="onClickCloseSettings"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/buttonBack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

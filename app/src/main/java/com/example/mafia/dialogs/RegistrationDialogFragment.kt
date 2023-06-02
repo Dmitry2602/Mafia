@@ -11,12 +11,14 @@ import com.example.mafia.activities.common_activities.preferences
 
 class RegistrationDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(requireContext(), R.style.RegistrationDialog)
+        val builder = AlertDialog.Builder(requireContext(), R.style.dialog)
         val inflater = requireActivity().layoutInflater.inflate(R.layout.dialog_registration, null)
         val editText = inflater.findViewById<EditText>(R.id.editTextUsername)
         return builder
             .setView(inflater)
-            .setPositiveButton(R.string.toRegister) { _, _ ->
+            .setTitle(R.string.dialogTitleRegistration)
+            .setMessage(R.string.dialogMessageRegistration)
+            .setPositiveButton(R.string.buttonDone) { _, _ ->
                 val username = editText.text.toString()
                 val editor = preferences.edit()
                 editor.putString(Preferences.USERNAME_TAG, username)

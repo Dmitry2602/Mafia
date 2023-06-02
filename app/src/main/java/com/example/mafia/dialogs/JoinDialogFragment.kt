@@ -25,16 +25,18 @@ class JoinDialogFragment : DialogFragment() {
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val builder = AlertDialog.Builder(requireContext(), R.style.RegistrationDialog)
-        val inflater = requireActivity().layoutInflater.inflate(R.layout.dialog_registration, null)
+        val builder = AlertDialog.Builder(requireContext(), R.style.dialog)
+        val inflater = requireActivity().layoutInflater.inflate(R.layout.dialog_join, null)
         val editText = inflater.findViewById<EditText>(R.id.editTextUsername)
         return builder
             .setView(inflater)
-            .setPositiveButton(R.string.toRegister) { _, _ ->
+            .setTitle(R.string.dialogTitleJoin)
+            .setMessage(R.string.dialogMessageJoin)
+            .setPositiveButton(R.string.buttonDone) { _, _ ->
                 val code = editText.text.toString()
                 listener.sendCode(code)
             }
-            .setNegativeButton("Закрыть") { _, _ -> }
+            .setNegativeButton(R.string.buttonClose) { _, _ -> }
             .create()
     }
 }

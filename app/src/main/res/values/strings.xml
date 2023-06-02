@@ -1,26 +1,26 @@
 <resources>
-    <string name="app_name">MAFIA</string>
+    <string name="app_name" translatable="false">MAFIA</string>
     <string name="tableOfContents" translatable="false">MAFIA</string>
-    <string name="createGame">Create game</string>
-    <string name="rules">Rules</string>
-    <string name="settings">Settings</string>
-    <string name="back">Back</string>
-    <string name="empty" translatable="false" />
-    <string name="startGame">Start game</string>
-    <string name="startTurn">Start turn</string>
-    <string name="enterNameHint">Enter player\'s name</string>
+    <string name="buttonHowToPlay">How to play</string>
+    <string name="buttonSetting">Settings</string>
+    <string name="buttonBack">Back</string>
+    <string name="buttonStartGame">Start game</string>
+    <string name="buttonStartTurn">Start turn</string>
 
     <string name="rulesText" translatable="false">Играть в мафию интересно разным типам людей потому, что в ней есть два пути к выигрышу. Можно вычислять противников логически, запоминая их действия по ходу игры, сопоставляя с результатами голосования. А можно психологически давить на игроков, побуждая их делать ошибки, провоцировать, или просто внимательно наблюдать за их поведением, делая выводы и принимая решения.
         Здесь каждый может раскрыться в выпавшей ему роли по-своему.Можно быть тихим застенчивым мафиози,
         не привлекающим внимание, можно быть громким обличающим мирным жителем, подозревающим и провоцирующем всех и вся. Можно наоборот. Игровая ситуация легко меняется, и тот игрок, которого только что обвиняли и почти отправили на «смерть», может одним удачным аргументом заставить команду поверить в виновность своего противника. Или спокойный мирный житель, в невиновности которого никто не сомневается, вдруг подвергается психологической атаке, теряется и вызывает на себя подозрение команды.
         Мафия — азартная, яркая игра, развивается непредсказуемо и держит в напряжении всех участников.</string>
-    <string name="makeMultiGame">Make game</string>
-    <string name="playerCounter"><font size="12">Enter the number\n of players</font></string>
-    <string name="localGame">Local game</string>
-    <string name="multiplayerGame">Multiplayer</string>
-    <string name="dialogRegistrationHint">Enter your nickname</string>
-    <string name="registration">Registration</string>
-    <string name="toRegister">Done</string>
-    <string name="connectMultiplayer">Connect</string>
-    <string name="registrationHint">This is required for multiplayer</string>
+    <string name="buttonCreateGame">Create game</string>
+    <string name="buttonLocalGame">Local game</string>
+    <string name="buttonMultiplayerGame">Multiplayer</string>
+    <string name="dialogHintRegistration">Enter your nickname</string>
+    <string name="buttonDone">Done</string>
+    <string name="buttonJoinGame">Join game</string>
+    <string name="dialogMessageRegistration">This is required for multiplayer</string>
+    <string name="dialogTitleJoin">Joining</string>
+    <string name="dialogTitleRegistration">Registration</string>
+    <string name="dialogHintJoin">Enter room code</string>
+    <string name="dialogMessageJoin">Host has to tell you the room code</string>
+    <string name="buttonClose">Close</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundGray"
+    android:background="@color/background_gray"
     tools:context=".activities.multiplayer_activities.MultiplayerMenu">
 
     <ImageView
@@ -29,7 +29,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="50dp"
-        android:background="@color/buttonColor"
+        android:background="@color/cream_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
@@ -39,17 +39,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/rules"
+        android:text="@string/buttonHowToPlay"
         android:textAlignment="center"
-        android:textAppearance="@style/textStyle"
-        android:textColor="@color/buttonColor"
+        android:textAppearance="@style/common_text"
+        android:textColor="@color/cream_gray"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
 
     <Button
         android:id="@+id/closeRules"
-        style="@style/textStyle"
+        style="@style/button_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -58,7 +58,7 @@
         android:onClick="onClickCloseRules"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:text="@string/back"
+        android:text="@string/buttonBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine" />
@@ -75,12 +75,12 @@
 
         <TextView
             android:id="@+id/textView_rules"
-
-            style="@style/textStyle"
+            style="@style/button_text"
             android:layout_width="300dp"
             android:layout_height="450dp"
-            android:background="@color/buttonColor"
+            android:background="@color/cream_gray"
             android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:scrollbarAlwaysDrawVerticalTrack="false"
             android:scrollbarStyle="outsideInset"
             android:scrollbars="none"

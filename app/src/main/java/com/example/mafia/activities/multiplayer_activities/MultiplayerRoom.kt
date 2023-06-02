@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.example.mafia.Player
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerRoomBinding
 import com.google.firebase.database.DataSnapshot

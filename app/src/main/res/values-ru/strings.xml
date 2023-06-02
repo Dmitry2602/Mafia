@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MAFIA</string>
-    <string name="settings">Настройки</string>
-    <string name="back">Назад</string>
-    <string name="startGame">Начать игру</string>
-    <string name="startTurn">Начать ход</string>
-    <string name="enterNameHint">Введите имя игрока</string>
-    <string name="createGame">Создать игру</string>
-    <string name="rules">Правила игры</string>
-    <string name="makeMultiGame">Создать игру</string>
-    <string name="playerCounter"><font size="22"> Введите количество игроков</font></string>
-    <string name="localGame">Локальная игра</string>
-    <string name="multiplayerGame">Сетевая игра</string>
-    <string name="dialogRegistrationHint">Введите свой псевдоним</string>
-    <string name="registration">Регистрация</string>
-    <string name="toRegister">Готово</string>
-    <string name="connectMultiplayer">Присоедениться</string>
-    <string name="registrationHint">Это необходимо для сетевой игры</string>
+    <string name="buttonHowToPlay">Как играть</string>
+    <string name="buttonSetting">Настройки</string>
+    <string name="buttonBack">Назад</string>
+    <string name="buttonStartGame">Начать игру</string>
+    <string name="buttonStartTurn">Начать ход</string>
+    <string name="buttonCreateGame">Создать игру</string>
+    <string name="buttonLocalGame">Локальная игра</string>
+    <string name="buttonMultiplayerGame">Игра по сети</string>
+    <string name="dialogHintRegistration">Введите свой псевдоним</string>
+    <string name="buttonDone">Готово</string>
+    <string name="buttonJoinGame">Присоедениться к игре</string>
+    <string name="dialogMessageRegistration">Это необходимо для игры по сети</string>
+    <string name="dialogTitleJoin">Присоединение</string>
+    <string name="dialogTitleRegistration">Регистрация</string>
+    <string name="dialogHintJoin">Введите код комнаты</string>
+    <string name="dialogMessageJoin">Создатель комнаты сообщит вам код</string>
+    <string name="buttonClose">Закрыть</string>
 </resources>
