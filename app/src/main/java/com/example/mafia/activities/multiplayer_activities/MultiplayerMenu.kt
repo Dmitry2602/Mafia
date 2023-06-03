@@ -7,7 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
+import com.example.mafia.DistributionRoles
+import com.example.mafia.Player
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerMenuBinding
 import com.example.mafia.dialogs.JoinDialogFragment
@@ -63,6 +64,22 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
             val joinDialog = JoinDialogFragment()
             joinDialog.show(supportFragmentManager, "JoinDialog")
         }
+        // Добавляем слушатель событий для gameStatusRef
+        gameStatusRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val gameStatus = dataSnapshot.getValue(String::class.java)
+
+                if (gameStatus == "active") {
+                    // Значение gameStatus равно "active", переходим на другую активити
+                    val intent = Intent(this@MultiplayerMenu, DistributionRoles::class.java)
+                    startActivity(intent)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Ошибка чтения значения gameStatus
+            }
+        })
     }
 
     private fun showJoinDialog() {
@@ -80,8 +97,7 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
     }
 
     override fun sendCode(code: String) {
-        val enteredCode = code
-        val roomRef = database.reference.child("rooms").child(enteredCode).child("players")
+        val roomRef = database.reference.child("rooms").child(code).child("players")
 
         roomRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
