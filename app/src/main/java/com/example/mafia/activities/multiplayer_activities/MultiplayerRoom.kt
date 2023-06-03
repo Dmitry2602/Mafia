@@ -1,10 +1,13 @@
 package com.example.mafia.activities.multiplayer_activities
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
-import com.example.mafia.Player
+import android.widget.Toast
+import com.example.mafia.DistributionRoles
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerRoomBinding
 import com.google.firebase.database.DataSnapshot
@@ -25,6 +28,7 @@ class MultiplayerRoom : AppCompatActivity() {
     private lateinit var gameStatusRef: DatabaseReference
     private lateinit var roundNumberRef: DatabaseReference
     private lateinit var currentPlayerIdRef: DatabaseReference
+    private lateinit var roomRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +42,7 @@ class MultiplayerRoom : AppCompatActivity() {
         binding.codeRoom.text = roomId
         // Initialize Firebase database and references
         database = FirebaseDatabase.getInstance()
+        roomRef = database.reference.child("rooms").child(roomId)
         playersRef = database.reference.child("rooms").child(roomId).child("players")
         gameStatusRef = database.reference.child("rooms").child(roomId).child("gameStatus")
         roundNumberRef = database.reference.child("rooms").child(roomId).child("roundNumber")
@@ -47,42 +52,54 @@ class MultiplayerRoom : AppCompatActivity() {
         val preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
         val nick = preferences.getString(Preferences.USERNAME_TAG, null).toString()
 
-        // Создание объекта текущего игрока
+        // Create the player object for the creator
         val creatorPlayer = Player("", nick, Player.Role.Unknown, true, "")
 
         // Add the creator player to the players collection
-        val creatorPlayerId = playersRef.push().key ?: ""
+        val creatorPlayerId = roomRef.child("players").push().key ?: ""
         creatorPlayer.playerId = creatorPlayerId
-        playersRef.child(creatorPlayerId).setValue(creatorPlayer)
-
         currentPlayerId = creatorPlayerId
+        roomRef.child("players").child(creatorPlayerId).setValue(creatorPlayer)
+
+        // Создаем gameStatus, roundNumber и currentPlayerId со значениями по умолчанию
+        roomRef.child("gameStatus").setValue("unactive")
+        roomRef.child("roundNumber").setValue(0)
+        roomRef.child("currentPlayerId").setValue("")
 
         buttonStartGame = binding.buttonStartGame
-        buttonStartGame.isEnabled = false
-
-        // Set up a listener to check the number of players
-        val playersCountListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val playersCount = dataSnapshot.childrenCount.toInt()
-
-                buttonStartGame.isEnabled = playersCount >= 4
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Handle database error
-            }
-        }
-
-        playersRef.addValueEventListener(playersCountListener)
 
         buttonStartGame.setOnClickListener {
-            // Start the game by updating the gameStatus and roundNumber
-            gameStatusRef.setValue("active")
-            roundNumberRef.setValue(1)
-            currentPlayerIdRef.setValue(currentPlayerId)
+            // Проверяем количество игроков в комнате
+            playersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val playersCount = dataSnapshot.childrenCount.toInt()
 
-            // Perform necessary actions to start the game
+                    if (playersCount >= 4) {
+                        // Количество игроков достаточно, запускаем игру
+                        gameStatusRef.setValue("active")
+                        roundNumberRef.setValue(1)
+                        currentPlayerIdRef.setValue(currentPlayerId)
+                        // переход на окно распределение ролей
+                        onDistributionRoles()
+                        Toast.makeText(this@MultiplayerRoom, "Игра была создана", Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Количество игроков недостаточно, выводим ошибку
+                        Toast.makeText(this@MultiplayerRoom, "Слишком мало игроков для начала игры", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Обрабатываем ошибку базы данных
+                }
+            })
         }
+
+
+    }
+
+    fun onDistributionRoles(){
+        val intent = Intent(this, DistributionRoles::class.java)
+        startActivity(intent)
     }
 
     /*private fun distributeRoles() {
