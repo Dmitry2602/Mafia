@@ -62,7 +62,7 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
 
         buttonStartGame.setOnClickListener {
             val joinDialog = JoinDialogFragment()
-            joinDialog.show(supportFragmentManager, "JoinDialog")
+            joinDialog.show(supportFragmentManager, Preferences.DIALOG_TAG_JOIN)
         }
         // Добавляем слушатель событий для gameStatusRef
         gameStatusRef.addValueEventListener(object : ValueEventListener {

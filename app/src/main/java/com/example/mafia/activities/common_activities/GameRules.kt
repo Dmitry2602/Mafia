@@ -11,6 +11,6 @@ class GameRules : AppCompatActivity() {
         binding = ActivityGameRulesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.closeRules.setOnClickListener { finish() }
+        binding.buttonCloseSettings.setOnClickListener { finish() }
     }
 }

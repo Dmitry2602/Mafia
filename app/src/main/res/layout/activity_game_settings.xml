@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
 
     <TextView
-        android:id="@+id/codeRoom"
+        android:id="@+id/textViewSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -48,19 +48,32 @@
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
 
     <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="309dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="28dp"
+        android:id="@+id/editTextUsername"
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="@string/dialogHintRegistration"
         android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewUsername"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textViewUsername"
+        app:layout_constraintTop_toTopOf="@+id/textViewUsername"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textViewUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="32dp"
+        android:text="Username:"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/codeRoom" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSettings" />
 
     <Button
-        android:id="@+id/closeRules"
+        android:id="@+id/buttonCloseSettings"
         style="@style/button_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -74,5 +87,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine" />
+
+    <Button
+        android:id="@+id/buttonReset"
+        style="@style/button_text"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="onClickReset"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="Reset"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCloseSettings"
+        app:layout_constraintEnd_toEndOf="@+id/buttonCloseSettings"
+        app:layout_constraintStart_toStartOf="@+id/buttonCloseSettings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,15 +20,14 @@ class MainMenu : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainMenuBinding.inflate(layoutInflater)
+        preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
         setContentView(binding.root)
 
-        preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
-        preferences.getString(Preferences.USERNAME_TAG, null)
         if (!preferences.contains(Preferences.USERNAME_TAG)) {
             val registrationDialog = RegistrationDialogFragment()
             registrationDialog.isCancelable = false
             val dialogManager = supportFragmentManager
-            registrationDialog.show(dialogManager, Preferences.DIALOG_TAG)
+            registrationDialog.show(dialogManager, Preferences.DIALOG_TAG_REGISTER)
         }
     }
 
