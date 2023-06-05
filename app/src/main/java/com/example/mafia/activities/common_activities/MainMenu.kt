@@ -40,7 +40,7 @@ class MainMenu : AppCompatActivity() {
         startActivity(intent)
     }
     fun onClickButtonRules(view: View){
-        val intent = Intent(this, GameRules::class.java)
+        val intent = Intent(this, GameHowToPlay::class.java)
         startActivity(intent)
     }
     fun onClickButtonSettings(view: View){

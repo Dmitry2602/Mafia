@@ -27,7 +27,7 @@
             android:name=".activities.common_activities.GameSettings"
             android:exported="false" />
         <activity
-            android:name=".activities.common_activities.GameRules"
+            android:name=".activities.common_activities.GameHowToPlay"
             android:exported="false" />
         <activity
             android:name=".activities.common_activities.MainMenu"
