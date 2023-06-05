@@ -27,7 +27,7 @@ class JoinDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder = AlertDialog.Builder(requireContext(), R.style.dialog)
         val inflater = requireActivity().layoutInflater.inflate(R.layout.dialog_join, null)
-        val editText = inflater.findViewById<EditText>(R.id.editTextUsername)
+        val editText = inflater.findViewById<EditText>(R.id.editTextRoomCode)
         return builder
             .setView(inflater)
             .setTitle(R.string.dialogTitleJoin)

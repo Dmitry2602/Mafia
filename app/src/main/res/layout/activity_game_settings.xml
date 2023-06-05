@@ -54,13 +54,15 @@
         android:layout_marginStart="16dp"
         android:ems="10"
         android:hint="@string/dialogHintRegistration"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:singleLine="true"
         app:layout_constraintBottom_toBottomOf="@+id/textViewUsername"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/textViewUsername"
         app:layout_constraintTop_toTopOf="@+id/textViewUsername"
-        android:inputType="textPersonName" />
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/textViewUsername"
@@ -68,38 +70,32 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="32dp"
-        android:text="Username:"
+        android:text="@string/textViewUsername"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintTop_toBottomOf="@+id/textViewSettings" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonCloseSettings"
-        style="@style/button_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/button"
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="32dp"
         android:onClick="onClickCloseSettings"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:text="@string/buttonBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
-        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine" />
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
+        tools:ignore="VisualLintButtonSize" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonReset"
-        style="@style/button_text"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
+        style="@style/button"
         android:layout_marginBottom="16dp"
         android:onClick="onClickReset"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:text="Reset"
+        android:text="@string/buttonReset"
         app:layout_constraintBottom_toTopOf="@+id/buttonCloseSettings"
         app:layout_constraintEnd_toEndOf="@+id/buttonCloseSettings"
-        app:layout_constraintStart_toStartOf="@+id/buttonCloseSettings" />
+        app:layout_constraintStart_toStartOf="@+id/buttonCloseSettings"
+        tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="gameName">
-        <item name="android:textSize">90sp</item>
-        <item name="android:textColor">#FFFFFF</item>
-    </style >
 
+<!-- text styles -->
     <style name="common_text">
         <item name="android:fontFamily">@font/bookmanoldstyle</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/cream_gray</item>
         <item name="backgroundTint">@color/cream_gray</item>
     </style>
 
     <style name="button_text">
         <item name="android:fontFamily">@font/bookmanoldstyle</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textAllCaps">false</item>
         <item name="backgroundTint">@color/cream_gray</item>
@@ -27,12 +24,26 @@
         <item name="backgroundTint">@color/cream_gray</item>
     </style>
 
+<!-- dialog styles -->
     <style name="dialog" parent="Base.Theme.AppCompat.Light.Dialog">
         <item name="android:minWidth">200dp</item>
         <item name="android:colorAccent">@color/cream_gray</item>
         <item name="android:background">@color/background_gray</item>
         <item name="android:windowTitleStyle">@style/dialog_title</item>
         <item name="android:textColorPrimary">@color/cream_gray</item>
+    </style>
+
+<!-- button styles -->
+    <style name="button" parent="@android:style/Widget.Button">
+        <item name="android:textAppearance">@style/button_text</item>
+        <item name="android:backgroundTint">@color/cream_gray</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:minHeight">60dp</item>
+        <item name="android:minWidth">310dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
     </style>
 
 </resources>

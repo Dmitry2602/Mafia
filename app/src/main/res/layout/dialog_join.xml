@@ -1,10 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/editTextUsername"
+        android:id="@+id/editTextRoomCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
@@ -12,7 +13,11 @@
         android:layout_marginRight="14dp"
         android:layout_marginBottom="4dp"
         android:hint="@string/dialogHintJoin"
+        android:inputType="text|textCapCharacters"
+        android:maxLength="4"
         android:minHeight="48dp"
         android:selectAllOnFocus="false"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:importantForAutofill="no"
+        tools:ignore="VisualLintTextFieldSize" />
 </LinearLayout>

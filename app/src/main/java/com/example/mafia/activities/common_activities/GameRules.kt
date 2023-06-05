@@ -2,6 +2,7 @@ package com.example.mafia.activities.common_activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.mafia.databinding.ActivityGameRulesBinding
 
 class GameRules : AppCompatActivity() {
@@ -13,4 +14,6 @@ class GameRules : AppCompatActivity() {
 
         binding.buttonCloseSettings.setOnClickListener { finish() }
     }
+
+    fun onClickCloseRules(view: View) = finish()
 }

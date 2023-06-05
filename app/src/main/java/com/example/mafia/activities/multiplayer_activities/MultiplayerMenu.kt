@@ -19,11 +19,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListener {
-    private lateinit var buttonStartGame: Button
+    private lateinit var buttonJoinGame: Button
     private lateinit var binding: ActivityMultiplayerMenuBinding
     private lateinit var roomId: String
     private lateinit var currentPlayerId: String
-    private lateinit var nick: String
+    private lateinit var username: String
 
     private lateinit var database: FirebaseDatabase
     private lateinit var playersRef: DatabaseReference
@@ -45,22 +45,18 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
         roundNumberRef = database.reference.child("rooms").child(roomId).child("roundNumber")
         currentPlayerIdRef = database.reference.child("rooms").child(roomId).child("currentPlayerId")
 
-
         val preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
-        nick = preferences.getString(Preferences.USERNAME_TAG, null).toString()
+        username = preferences.getString(Preferences.USERNAME_TAG, null).toString()
 
         // создание класса игрока
-        val creatorPlayer = Player("", nick, Player.Role.Unknown, true, "")
-
+        val creatorPlayer = Player("", username, Player.Role.Unknown, true, "")
         val creatorPlayerId = playersRef.push().key ?: ""
         creatorPlayer.playerId = creatorPlayerId
         playersRef.child(creatorPlayerId).setValue(creatorPlayer)
-
         currentPlayerId = creatorPlayerId
 
-        buttonStartGame = binding.buttonStartGame
-
-        buttonStartGame.setOnClickListener {
+        buttonJoinGame = binding.buttonJoinGame
+        buttonJoinGame.setOnClickListener {
             val joinDialog = JoinDialogFragment()
             joinDialog.show(supportFragmentManager, Preferences.DIALOG_TAG_JOIN)
         }
@@ -82,18 +78,14 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
         })
     }
 
-    private fun showJoinDialog() {
+    fun onClickButtonJoinGame(view: View) {
         val joinDialog = JoinDialogFragment()
-        joinDialog.show(supportFragmentManager, "JoinDialog")
+        joinDialog.show(supportFragmentManager, Preferences.DIALOG_TAG_JOIN)
     }
 
     fun onClickButtonCreateGame(view: View) {
         val intent = Intent(this, MultiplayerRoom::class.java)
         startActivity(intent)
-    }
-
-    fun onClickButtonJoinGame(view: View) {
-        showJoinDialog()
     }
 
     override fun sendCode(code: String) {
@@ -103,7 +95,7 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
                     // подключение игрока в комнату, если код верный
-                    val player = Player("", nick, Player.Role.Unknown, true, "")
+                    val player = Player("", username, Player.Role.Unknown, true, "")
                     val playerId = roomRef.push().key ?: ""
                     player.playerId = playerId
                     roomRef.child(playerId).setValue(player)

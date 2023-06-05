@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_gray"
-    tools:context=".activities.multiplayer_activities.MultiplayerMenu">
+    tools:context=".activities.common_activities.GameRules">
 
     <ImageView
         android:id="@+id/imageViewTitle"
@@ -47,21 +47,18 @@
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonCloseSettings"
-        style="@style/button_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        style="@style/button"
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="32dp"
         android:onClick="onClickCloseRules"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:text="@string/buttonBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
-        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine" />
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
+        tools:ignore="VisualLintButtonSize" />
 
     <ScrollView
         android:id="@+id/scrollView"

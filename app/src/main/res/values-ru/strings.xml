@@ -17,4 +17,6 @@
     <string name="dialogHintJoin">Введите код комнаты</string>
     <string name="dialogMessageJoin">Создатель комнаты сообщит вам код</string>
     <string name="buttonClose">Закрыть</string>
+    <string name="textViewUsername">Псевдоним</string>
+    <string name="buttonReset">Сбросить настройки</string>
 </resources>

@@ -14,7 +14,7 @@
     <string name="buttonCreateGame">Create game</string>
     <string name="buttonLocalGame">Local game</string>
     <string name="buttonMultiplayerGame">Multiplayer</string>
-    <string name="dialogHintRegistration">Enter your nickname</string>
+    <string name="dialogHintRegistration">Enter your username</string>
     <string name="buttonDone">Done</string>
     <string name="buttonJoinGame">Join game</string>
     <string name="dialogMessageRegistration">This is required for multiplayer</string>
@@ -23,4 +23,6 @@
     <string name="dialogHintJoin">Enter room code</string>
     <string name="dialogMessageJoin">Host has to tell you the room code</string>
     <string name="buttonClose">Close</string>
+    <string name="textViewUsername">Username</string>
+    <string name="buttonReset">Reset</string>
 </resources>
