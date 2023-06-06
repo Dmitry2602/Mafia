@@ -4,11 +4,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import com.example.mafia.DistributionRoles
-import com.example.mafia.Player
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerRoomBinding
 import com.google.firebase.database.DataSnapshot
@@ -44,10 +42,15 @@ class MultiplayerRoom : AppCompatActivity() {
         // Initialize Firebase database and references
         database = FirebaseDatabase.getInstance()
         roomRef = database.reference.child("rooms").child(roomId)
+        // Создаем gameStatus, roundNumber и currentPlayerId со значениями по умолчанию
+        roomRef.child("gameStatus").setValue(false)
+        roomRef.child("roundNumber").setValue(0)
+        roomRef.child("currentPlayerId").setValue("")
         playersRef = database.reference.child("rooms").child(roomId).child("players")
         gameStatusRef = database.reference.child("rooms").child(roomId).child("gameStatus")
         roundNumberRef = database.reference.child("rooms").child(roomId).child("roundNumber")
         currentPlayerIdRef = database.reference.child("rooms").child(roomId).child("currentPlayerId")
+
 
         // Получение ника игрока
         val preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
@@ -62,10 +65,7 @@ class MultiplayerRoom : AppCompatActivity() {
         currentPlayerId = creatorPlayerId
         roomRef.child("players").child(creatorPlayerId).setValue(creatorPlayer)
 
-        // Создаем gameStatus, roundNumber и currentPlayerId со значениями по умолчанию
-        roomRef.child("gameStatus").setValue("unactive")
-        roomRef.child("roundNumber").setValue(0)
-        roomRef.child("currentPlayerId").setValue("")
+
 
         buttonStartGame = binding.buttonStartGame
 
@@ -77,7 +77,7 @@ class MultiplayerRoom : AppCompatActivity() {
 
                     if (playersCount >= 4) {
                         // Количество игроков достаточно, запускаем игру
-                        gameStatusRef.setValue("active")
+                        gameStatusRef.setValue(true)
                         roundNumberRef.setValue(1)
                         currentPlayerIdRef.setValue(currentPlayerId)
                         // переход на окно распределение ролей
@@ -103,117 +103,10 @@ class MultiplayerRoom : AppCompatActivity() {
         startActivity(intent)
     }
 
-    /*private fun distributeRoles() {
-        playersRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val players: MutableList<String> = mutableListOf()
-
-                for (playerSnapshot in dataSnapshot.children) {
-                    val player = playerSnapshot.getValue(Player::class.java)
-                    player?.let {
-                        players.add(it.nickname)
-                    }
-                }
-
-                val roles: MutableList<String> = mutableListOf(
-                    "Mafia",
-                    "Mafia",
-                    "Civilian",
-                    "Civilian",
-                    "Civilian",
-                    "Civilian",
-                    "Sheriff",
-                    "Doctor"
-                )
-
-                // Перемешиваем роли
-                roles.shuffle()
-
-                // Распределяем роли между игроками
-                val rolesMap: MutableMap<String, String> = mutableMapOf()
-                for (player in players) {
-                    val role = roles.removeAt(0)
-                    rolesMap[player] = role
-                }
-
-                // Сохраняем распределение ролей в базе данных
-                databaseReference.child("rooms").child(roomId).child("roles").setValue(rolesMap)
-
-                // TODO: Выполните действия, связанные с началом игры
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Обработка ошибки, если такая имеется
-            }
-        })
-    }*/
     private fun generateRoomId(): String {
         val charPool: List<Char> = ('A'..'Z') + ('0'..'9')
         return (1..4)
             .map { Random.nextInt(0, charPool.size).let { charPool[it] } }
             .joinToString("")
     }
-    /*private fun checkPlayersCount() {
-        playersRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val playersCount = dataSnapshot.childrenCount.toInt()
-
-                if (playersCount <= 4) {
-                    Toast.makeText(applicationContext, "Должно быть как минимум 4 игрока", Toast.LENGTH_SHORT).show()
-                } else {
-                    // Распределение ролей
-                    distributeRoles()
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Обработка ошибки, если такая имеется
-            }
-        })
-    }
-
-    private fun distributeRoles() {
-        playersRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val players: MutableList<String> = mutableListOf()
-
-                for (playerSnapshot in dataSnapshot.children) {
-                    val player = playerSnapshot.getValue(Player::class.java)
-                    player?.let {
-                        players.add(it.nickname)
-                    }
-                }
-
-                val roles: MutableList<String> = mutableListOf(
-                    "Мафия",
-                    "Мафия",
-                    "Мирный житель",
-                    "Мирный житель",
-                    "Мирный житель",
-                    "Мирный житель",
-                    "Шериф",
-                    "Доктор"
-                )
-
-                // Перемешиваем роли
-                roles.shuffle()
-
-                // Распределяем роли между игроками
-                val rolesMap: MutableMap<String, String> = mutableMapOf()
-                for (player in players) {
-                    val role = roles.removeAt(0)
-                    rolesMap[player] = role
-                }
-
-                // Сохраняем распределение ролей в базе данных
-                databaseReference.child("rooms").child(roomId).child("roles").setValue(rolesMap)
-
-                // TODO: Выполните действия, связанные с началом игры
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Обработка ошибки, если такая имеется
-            }
-        })
-    }*/
 }
