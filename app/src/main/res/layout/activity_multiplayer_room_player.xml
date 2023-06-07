@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_gray"
-    tools:context=".activities.multiplayer_activities.MultiplayerMenu">
+    tools:context=".activities.multiplayer_activities.MultiplayerRoom">
 
     <ImageView
         android:id="@+id/imageViewTitle"
@@ -39,41 +39,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/buttonMultiplayerGame"
         android:textAlignment="center"
-        android:textAppearance="@style/button_text"
-        android:textColor="@color/cream_gray"
+        android:textAppearance="@style/common_text"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonJoinGame"
-        style="@style/button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:onClick="onClickButtonJoinGame"
-        android:text="@string/buttonJoinGame"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
-        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRoomCode"
-        app:layout_constraintVertical_bias="0.4"
-        tools:ignore="VisualLintButtonSize" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonCreateGame"
-        style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp"
-        android:onClick="onClickButtonCreateGame"
-        android:text="@string/buttonCreateGame"
-        app:layout_constraintEnd_toEndOf="@+id/buttonJoinGame"
-        app:layout_constraintStart_toStartOf="@+id/buttonJoinGame"
-        app:layout_constraintTop_toBottomOf="@+id/buttonJoinGame"
-        tools:ignore="VisualLintButtonSize" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

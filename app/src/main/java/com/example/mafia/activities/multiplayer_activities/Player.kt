@@ -2,7 +2,7 @@ package com.example.mafia.activities.multiplayer_activities
 
 data class Player(
     var playerId: String,
-    val nickname: String,
+    val username: String,
     val role: Role,
     val isAlive: Boolean,
     val votedAgainst: String

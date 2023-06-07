@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
 
     <TextView
-        android:id="@+id/codeRoom"
+        android:id="@+id/textViewRoomCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -68,7 +68,7 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonCloseSettings"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/codeRoom">
+        app:layout_constraintTop_toBottomOf="@+id/textViewRoomCode">
 
         <TextView
             android:id="@+id/textView_rules"

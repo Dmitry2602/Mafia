@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.mafia.DistributionRoles
+import com.example.mafia.GameCycle
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerMenuBinding
 import com.example.mafia.dialogs.JoinDialogFragment
@@ -21,7 +21,7 @@ import java.util.concurrent.CountDownLatch
 
 class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListener {
     private lateinit var binding: ActivityMultiplayerMenuBinding
-    private lateinit var nick: String
+    private lateinit var username: String
     private lateinit var database: FirebaseDatabase
     private lateinit var roomRef: DatabaseReference
     private var roomId: String = ""
@@ -35,13 +35,7 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
         database = FirebaseDatabase.getInstance()
 
         val preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
-        nick = preferences.getString(Preferences.USERNAME_TAG, null).toString()
-
-
-        binding.buttonJoinGame.setOnClickListener {
-            val joinDialog = JoinDialogFragment()
-            joinDialog.show(supportFragmentManager, "JoinDialog")
-        }
+        username = preferences.getString(Preferences.USERNAME_TAG, null).toString()
 
         roomRef = FirebaseDatabase.getInstance().getReference("rooms")
         Thread {
@@ -58,12 +52,18 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
                 if (dataSnapshot.exists()) {
                     roomId = code
                     roomIdLatch.countDown()
-                    val player = Player("", nick, Player.Role.Unknown, true, "")
+                    val player = Player("", username, Player.Role.Unknown, true, "")
                     val playerId = roomRef.push().key ?: ""
                     player.playerId = playerId
                     roomRef.child(playerId).setValue(player)
                     Toast.makeText(applicationContext, "Вы зашли в комнату!", Toast.LENGTH_SHORT)
                         .show()
+
+                    val intent = Intent(applicationContext, MultiplayerRoom::class.java)
+                    intent.putExtra(Preferences.PROPERTY_TAG, Preferences.PLAYER_TAG)
+                    intent.putExtra(Preferences.ROOM_CODE, roomId)
+                    startActivity(intent)
+
                 } else {
                     // Ошибка, если код комнаты неверный
                     Toast.makeText(applicationContext, "Неверный код комнаты", Toast.LENGTH_SHORT).show()
@@ -85,7 +85,8 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
                     Log.i(TAG, "gameStatus равен: $isGameStarted")
                     if (isGameStarted != null && isGameStarted) {
                         // Комната существует и игра уже началась
-                        startOtherActivity()
+                        val intent = Intent(applicationContext, GameCycle::class.java)
+                        startActivity(intent)
                     } else {
                         //вызываем функцию до тех пор, пока не изменится gameStatus
                         checkGameStatus()
@@ -111,24 +112,14 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
         checkGameStatus()
     }
 
-    private fun startOtherActivity() {
-        val intent = Intent(this, DistributionRoles::class.java)
-        startActivity(intent)
-    }
-
-    private fun showJoinDialog() {
+    fun onClickButtonJoinGame(view: View) {
         val joinDialog = JoinDialogFragment()
-        joinDialog.show(supportFragmentManager, "JoinDialog")
+        joinDialog.show(supportFragmentManager, Preferences.DIALOG_TAG_JOIN)
     }
 
     fun onClickButtonCreateGame(view: View) {
         val intent = Intent(this, MultiplayerRoom::class.java)
+        intent.putExtra(Preferences.PROPERTY_TAG, Preferences.HOST_TAG)
         startActivity(intent)
     }
-
-    fun onClickButtonJoinGame(view: View) {
-        showJoinDialog()
-    }
-
-
 }

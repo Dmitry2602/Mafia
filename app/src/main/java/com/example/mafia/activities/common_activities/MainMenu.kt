@@ -6,7 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.mafia.DistributionRoles
+import com.example.mafia.GameCycle
 import com.example.mafia.Preferences
 import com.example.mafia.activities.multiplayer_activities.MultiplayerMenu
 import com.example.mafia.databinding.ActivityMainMenuBinding
@@ -32,7 +32,7 @@ class MainMenu : AppCompatActivity() {
     }
 
     fun onClickButtonLocalGame(view: View){
-        val intent = Intent(this, DistributionRoles::class.java)
+        val intent = Intent(this, GameCycle::class.java)
         startActivity(intent)
     }
     fun onClickButtonMultiplayerGame(view: View){
