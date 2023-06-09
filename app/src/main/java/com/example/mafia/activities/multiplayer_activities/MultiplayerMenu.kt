@@ -24,8 +24,10 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
     private lateinit var username: String
     private lateinit var database: FirebaseDatabase
     private lateinit var roomRef: DatabaseReference
+    private lateinit var player: Player
     private var roomId: String = ""
     private val roomIdLatch = CountDownLatch(1)
+    private var isGameCycleStarted = false // Флаг для отслеживания статуса перехода на GameCycle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +54,7 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
                 if (dataSnapshot.exists()) {
                     roomId = code
                     roomIdLatch.countDown()
-                    val player = Player("", username, Player.Role.Unknown, true, "")
+                    player = Player("", username, Player.Role.Unknown.toString(), true, "")
                     val playerId = roomRef.push().key ?: ""
                     player.playerId = playerId
                     roomRef.child(playerId).setValue(player)
@@ -62,6 +64,7 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
                     val intent = Intent(applicationContext, MultiplayerRoom::class.java)
                     intent.putExtra(Preferences.PROPERTY_TAG, Preferences.PLAYER_TAG)
                     intent.putExtra(Preferences.ROOM_CODE, roomId)
+                    intent.putExtra("playerId", player.playerId)
                     startActivity(intent)
 
                 } else {
@@ -77,6 +80,10 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
     }
 
     private fun checkGameStatus() {
+        if (isGameCycleStarted) {
+            return // Остановка рекурсии, если уже был переход на GameCycle активити
+        }
+
         roomRef.child(roomId).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -85,13 +92,16 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
                     Log.i(TAG, "gameStatus равен: $isGameStarted")
                     if (isGameStarted != null && isGameStarted) {
                         // Комната существует и игра уже началась
+                        isGameCycleStarted = true // Установка флага, что переход на GameCycle активити уже был
                         val intent = Intent(applicationContext, GameCycle::class.java)
+                        intent.putExtra("roomId", roomId)
                         startActivity(intent)
                     } else {
-                        //вызываем функцию до тех пор, пока не изменится gameStatus
+                        if (isGameCycleStarted) {
+                            return // Остановка рекурсии, если уже был переход на GameCycle активити
+                        }
+                        // Вызываем функцию до тех пор, пока не изменится gameStatus
                         checkGameStatus()
-                        // Игра еще не началась
-                        // Действия, которые нужно выполнить, если игра не началась
                     }
                 }
             }

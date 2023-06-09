@@ -57,6 +57,7 @@
         android:backgroundTint="@color/cream_gray"
         android:clickable="false"
         android:scaleType="fitCenter"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textViewRole"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"

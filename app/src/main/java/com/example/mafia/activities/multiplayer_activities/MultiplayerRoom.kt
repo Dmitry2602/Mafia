@@ -21,7 +21,7 @@ class MultiplayerRoom : AppCompatActivity() {
     private lateinit var bindingPlayerLayout: ActivityMultiplayerRoomPlayerBinding
     private lateinit var roomId: String
     private lateinit var currentPlayerId: String
-    private lateinit var currentPlayer: Player
+    private lateinit var creatorPlayer: Player
     private lateinit var database: FirebaseDatabase
     private lateinit var playersRef: DatabaseReference
     private lateinit var gameStatusRef: DatabaseReference
@@ -37,6 +37,7 @@ class MultiplayerRoom : AppCompatActivity() {
                 bindingPlayerLayout = ActivityMultiplayerRoomPlayerBinding.inflate(layoutInflater)
                 setContentView(bindingPlayerLayout.root)
                 val roomCode = intent.getStringExtra(Preferences.ROOM_CODE)
+                val playerId = intent.getStringExtra("playerId")
                 bindingPlayerLayout.textViewRoomCode.text = roomCode
             }
             Preferences.HOST_TAG -> {
@@ -63,7 +64,7 @@ class MultiplayerRoom : AppCompatActivity() {
                 val username = preferences.getString(Preferences.USERNAME_TAG, null).toString()
 
                 // Create the player object for the creator
-                val creatorPlayer = Player("", username, Player.Role.Unknown, true, "")
+                creatorPlayer = Player("", username, Player.Role.Unknown.toString(), true, "")
 
                 // Add the creator player to the players collection
                 val creatorPlayerId = roomRef.child("players").push().key ?: ""
@@ -77,13 +78,16 @@ class MultiplayerRoom : AppCompatActivity() {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             val playersCount = dataSnapshot.childrenCount.toInt()
 
-                            if (playersCount >= 4) {
+                            if (playersCount >= 2) {
                                 // Количество игроков достаточно, запускаем игру
                                 gameStatusRef.setValue(true)
                                 roundNumberRef.setValue(1)
                                 currentPlayerIdRef.setValue(currentPlayerId)
+
+                                distributeRolesFromFirebase(roomId) //распределение ролей
                                 // переход на окно распределение ролей
                                 val intent = Intent(applicationContext, GameCycle::class.java)
+                                intent.putExtra("roomId", roomId)
                                 startActivity(intent)
                                 Toast.makeText(this@MultiplayerRoom, "Игра была создана", Toast.LENGTH_SHORT).show()
                             } else {
@@ -98,6 +102,63 @@ class MultiplayerRoom : AppCompatActivity() {
                     })
                 }
             }
+        }
+    }
+    private fun distributeRolesFromFirebase(roomCode: String) {
+        val playersRef = database.reference.child("rooms").child(roomCode).child("players")
+
+        playersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val playerList: MutableList<Player> = mutableListOf()
+
+                for (playerSnapshot in dataSnapshot.children) {
+                    val playerId = playerSnapshot.key ?: ""
+                    val playerName = playerSnapshot.child("username").value as String
+
+                    // Создайте экземпляр класса Player и добавьте его в список игроков
+                    val player = Player(playerId, playerName, Player.Role.Unknown.toString(), true, "")
+                    playerList.add(player)
+                }
+
+                // Распределите роли между игроками
+                distributeRoles(playerList)
+
+                // Сохраните обновленные данные о ролях игроков в базе данных Firebase
+                saveRolesToFirebase(playerList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Обработка ошибки получения данных из Firebase
+            }
+        })
+    }
+    private fun distributeRoles(playerList: MutableList<Player>) {
+        val numPlayers = playerList.size
+        val numMafia = numPlayers / 4 // Количество мафий
+
+        val availableRoles = mutableListOf<Player.Role>()
+        repeat(numMafia) {
+            availableRoles.add(Player.Role.Mafia)
+        }
+        repeat(numPlayers - numMafia) {
+            availableRoles.add(Player.Role.Civilian)
+        }
+
+        playerList.shuffle() // Перемешиваем список игроков
+
+        for (i in 0 until numPlayers) {
+            val player = playerList[i]
+            val roleIndex = (0 until availableRoles.size).random()
+            val role = availableRoles[roleIndex]
+            availableRoles.removeAt(roleIndex)
+
+            player.role = role.toString()
+        }
+    }
+    private fun saveRolesToFirebase(playerList: List<Player>) {
+        for (player in playerList) {
+            val playerRef = database.reference.child("rooms").child(roomId).child("players").child(player.playerId)
+            playerRef.child("role").setValue(player.role)
         }
     }
 

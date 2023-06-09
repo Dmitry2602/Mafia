@@ -15,4 +15,6 @@ object Preferences {
     const val PLAYER_TAG = "PLAYER"
 
     const val ROOM_CODE = "CODE"
+
+
 }
