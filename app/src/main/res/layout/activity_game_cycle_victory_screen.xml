@@ -35,11 +35,11 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
 
     <TextView
-        android:id="@+id/textViewMeeting"
+        android:id="@+id/textViewVictory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Знакомство"
+        android:text="Конец игры"
         android:textAlignment="center"
         android:textAppearance="@style/common_text"
         android:textColor="@color/cream_gray"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
 
     <ImageButton
-        android:id="@+id/imageButtonRole"
+        android:id="@+id/imageButtonVictory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="22dp"
@@ -57,37 +57,49 @@
         android:backgroundTint="@color/cream_gray"
         android:clickable="false"
         android:scaleType="fitCenter"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/textViewRole"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWin"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/textViewMeeting"
-        app:srcCompat="@drawable/role_mafia" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewVictory"
+        app:srcCompat="@drawable/victory_screen_mafia" />
 
     <TextView
-        android:id="@+id/textViewRole"
+        android:id="@+id/textViewWin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="Вы Мафия"
+        android:layout_marginBottom="28dp"
+        android:text="Победа мафии"
         android:textAlignment="center"
         android:textAppearance="@style/common_text"
         android:textColor="@color/cream_gray"
-        app:layout_constraintBottom_toTopOf="@+id/buttonTimer"
+        app:layout_constraintBottom_toTopOf="@+id/buttonReturnToRoom"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonTimer"
+        android:id="@+id/buttonReturnToRoom"
+        style="@style/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="28dp"
+        android:text="Вернуться в комнату"
+        app:layout_constraintBottom_toTopOf="@+id/buttonReturnToMenu"
+        app:layout_constraintEnd_toEndOf="@+id/buttonReturnToMenu"
+        app:layout_constraintStart_toStartOf="@+id/buttonReturnToMenu"
+        tools:ignore="VisualLintButtonSize" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonReturnToMenu"
         style="@style/button"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
         android:layout_marginBottom="32dp"
-        android:clickable="false"
-        android:text="Время"
+        android:text="Вернуться в меню"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"

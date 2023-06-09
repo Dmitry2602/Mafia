@@ -8,17 +8,14 @@ import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import com.example.mafia.activities.multiplayer_activities.Player
-import com.example.mafia.databinding.ActivityDistributionRolesBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.example.mafia.databinding.ActivityGameCycleDistributionRolesBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.tasks.await
 
 class GameCycle : AppCompatActivity() {
-    private lateinit var binding: ActivityDistributionRolesBinding
+    private lateinit var binding: ActivityGameCycleDistributionRolesBinding
     private lateinit var database: FirebaseDatabase
     private lateinit var roomId: String
     private lateinit var player: Player
@@ -27,7 +24,7 @@ class GameCycle : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         roomId = intent.getStringExtra("roomId").toString()
         Log.i(TAG, "РУМ АЙДИ: $roomId")
-        binding = ActivityDistributionRolesBinding.inflate(layoutInflater)
+        binding = ActivityGameCycleDistributionRolesBinding.inflate(layoutInflater)
         database = FirebaseDatabase.getInstance()
 
         // Получение ника игрока
