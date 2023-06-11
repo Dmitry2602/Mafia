@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.example.mafia.GameCycle
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerRoomHostBinding
 import com.example.mafia.databinding.ActivityMultiplayerRoomPlayerBinding
@@ -86,7 +85,7 @@ class MultiplayerRoom : AppCompatActivity() {
 
                                 distributeRolesFromFirebase(roomId) //распределение ролей
                                 // переход на окно распределение ролей
-                                val intent = Intent(applicationContext, GameCycle::class.java)
+                                val intent = Intent(applicationContext, GameCycleMultiplayer::class.java)
                                 intent.putExtra("roomId", roomId)
                                 startActivity(intent)
                                 Toast.makeText(this@MultiplayerRoom, "Игра была создана", Toast.LENGTH_SHORT).show()

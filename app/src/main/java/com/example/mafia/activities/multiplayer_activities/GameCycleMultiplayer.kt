@@ -1,4 +1,4 @@
-package com.example.mafia
+package com.example.mafia.activities.multiplayer_activities
 
 import android.content.ContentValues.TAG
 import android.content.Context
@@ -7,14 +7,15 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
-import com.example.mafia.activities.multiplayer_activities.Player
+import com.example.mafia.Preferences
+import com.example.mafia.R
 import com.example.mafia.databinding.ActivityGameCycleDistributionRolesBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class GameCycle : AppCompatActivity() {
+class GameCycleMultiplayer : AppCompatActivity() {
     private lateinit var binding: ActivityGameCycleDistributionRolesBinding
     private lateinit var database: FirebaseDatabase
     private lateinit var roomId: String

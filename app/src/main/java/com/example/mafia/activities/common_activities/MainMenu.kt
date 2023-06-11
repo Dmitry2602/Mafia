@@ -6,8 +6,9 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.mafia.GameCycle
+import com.example.mafia.activities.multiplayer_activities.GameCycleMultiplayer
 import com.example.mafia.Preferences
+import com.example.mafia.activities.local_activities.LocalRoom
 import com.example.mafia.activities.multiplayer_activities.MultiplayerMenu
 import com.example.mafia.databinding.ActivityMainMenuBinding
 import com.example.mafia.dialogs.RegistrationDialogFragment
@@ -32,7 +33,7 @@ class MainMenu : AppCompatActivity() {
     }
 
     fun onClickButtonLocalGame(view: View){
-        val intent = Intent(this, GameCycle::class.java)
+        val intent = Intent(this, LocalRoom::class.java)
         startActivity(intent)
     }
     fun onClickButtonMultiplayerGame(view: View){
