@@ -13,6 +13,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.tasks.await
+import java.util.concurrent.CountDownLatch
 
 class GameCycle : AppCompatActivity() {
     private lateinit var binding: ActivityGameCycleDistributionRolesBinding
@@ -20,6 +22,8 @@ class GameCycle : AppCompatActivity() {
     private lateinit var roomId: String
     private lateinit var player: Player
     private lateinit var userPlayerId: String
+    private lateinit var username: String
+    private val roomIdLatch = CountDownLatch(1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         roomId = intent.getStringExtra("roomId").toString()
@@ -29,18 +33,25 @@ class GameCycle : AppCompatActivity() {
 
         // Получение ника игрока
         val preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
-        val username = preferences.getString(Preferences.USERNAME_TAG, null).toString()
+        username = preferences.getString(Preferences.USERNAME_TAG, null).toString()
+        Log.i(TAG, "Username = $username")
         fetchPlayerIdByUsername(username) { playerId ->
             if (playerId != null) {
                 userPlayerId = playerId
                 Log.i(TAG, "playerId = $userPlayerId")
+
             } else {
                 // Игрок с указанным ником не найден
             }
         }
 
+        Thread {
+            roomIdLatch.await()
+            runOnUiThread {
+                fetchPlayerData()
+            }
+        }.start()
 
-        fetchPlayerData()
         //При создании активити будет запущен таймер на 60 секунд
         object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -60,27 +71,22 @@ class GameCycle : AppCompatActivity() {
         playerRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    val playerSnapshot = dataSnapshot.children.firstOrNull()
-                    val playerId = playerSnapshot?.key ?: ""
-                    val username = playerSnapshot?.child("username")?.value as? String
-                    val role = playerSnapshot?.child("role")?.value as? String
+                    val username = dataSnapshot.child("username").value as? String
+                    val role = dataSnapshot.child("role").value as? String
                     Log.i(TAG, "username: $username")
-                    // Создаем экземпляр класса Player с полученными данными
-                    player = Player(playerId, username ?: "", role ?: "", true, "")
-                    Log.i(TAG, "player role = ${player.role}")
-                    if (player.role == Player.Role.Mafia.toString()){
+                    Log.i(TAG, "role: $role")
+                    if (role == Player.Role.Mafia.toString()){
                         // Отображаем роль игрока в textViewRole
                         binding.imageButtonRole.setImageResource(R.drawable.role_mafia)
                         binding.imageButtonRole.visibility = View.VISIBLE
                         binding.textViewRole.text = "Вы Мафия"
                     }
-                    if (player.role == Player.Role.Civilian.toString()){
+                    if (role == Player.Role.Civilian.toString()){
                         // Отображаем роль игрока в textViewRole
                         binding.imageButtonRole.setImageResource(R.drawable.citizens)
                         binding.imageButtonRole.visibility = View.VISIBLE
                         binding.textViewRole.text = "Вы мирный житель"
                     }
-
                 }
             }
 
@@ -101,6 +107,7 @@ class GameCycle : AppCompatActivity() {
                         Log.i(TAG, "AAAAA: $playerId")
                         if (playerId != null) {
                             // playerId найден
+                            roomIdLatch.countDown()
                             callback(playerId)
                             return
                         }

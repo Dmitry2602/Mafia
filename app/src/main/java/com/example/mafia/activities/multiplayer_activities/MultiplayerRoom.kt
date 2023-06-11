@@ -77,7 +77,6 @@ class MultiplayerRoom : AppCompatActivity() {
                     playersRef.addListenerForSingleValueEvent(object : ValueEventListener {
                         override fun onDataChange(dataSnapshot: DataSnapshot) {
                             val playersCount = dataSnapshot.childrenCount.toInt()
-
                             if (playersCount >= 2) {
                                 // Количество игроков достаточно, запускаем игру
                                 gameStatusRef.setValue(true)
@@ -134,7 +133,7 @@ class MultiplayerRoom : AppCompatActivity() {
     }
     private fun distributeRoles(playerList: MutableList<Player>) {
         val numPlayers = playerList.size
-        val numMafia = numPlayers / 4 // Количество мафий
+        val numMafia = 1//numPlayers / 3 // Количество мафий
 
         val availableRoles = mutableListOf<Player.Role>()
         repeat(numMafia) {
