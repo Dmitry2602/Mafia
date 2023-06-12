@@ -3,7 +3,6 @@ package com.example.mafia
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mafia.databinding.RecyclerViewPlayerBinding

@@ -79,17 +79,18 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonTimer"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="32dp"
         android:clickable="false"
-        android:text="Время"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        tools:ignore="VisualLintButtonSize" />
+
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="32dp"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

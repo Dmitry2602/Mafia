@@ -7,18 +7,21 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mafia.Preferences
 import com.example.mafia.R
+import com.example.mafia.VotingAdapter
 import com.example.mafia.databinding.ActivityGameCycleDistributionRolesBinding
+import com.example.mafia.databinding.ActivityGameCycleNightBinding
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.coroutines.tasks.await
 import java.util.concurrent.CountDownLatch
 
 class GameCycleMultiplayer : AppCompatActivity() {
-    private lateinit var binding: ActivityGameCycleDistributionRolesBinding
+    private lateinit var bindingDistributionRoles: ActivityGameCycleDistributionRolesBinding
+    private lateinit var bindingNight: ActivityGameCycleNightBinding
     private lateinit var database: FirebaseDatabase
     private lateinit var roomId: String
     private lateinit var player: Player
@@ -29,7 +32,9 @@ class GameCycleMultiplayer : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         roomId = intent.getStringExtra("roomId").toString()
         Log.i(TAG, "РУМ АЙДИ: $roomId")
-        binding = ActivityGameCycleDistributionRolesBinding.inflate(layoutInflater)
+        bindingDistributionRoles = ActivityGameCycleDistributionRolesBinding.inflate(layoutInflater)
+        bindingNight = ActivityGameCycleNightBinding.inflate(layoutInflater)
+
         database = FirebaseDatabase.getInstance()
 
         // Получение ника игрока
@@ -40,7 +45,6 @@ class GameCycleMultiplayer : AppCompatActivity() {
             if (playerId != null) {
                 userPlayerId = playerId
                 Log.i(TAG, "playerId = $userPlayerId")
-
             } else {
                 // Игрок с указанным ником не найден
             }
@@ -53,18 +57,32 @@ class GameCycleMultiplayer : AppCompatActivity() {
             }
         }.start()
 
-        //При создании активити будет запущен таймер на 60 секунд
-        object : CountDownTimer(60000, 1000) {
+
+        setContentView(bindingDistributionRoles.root)
+
+//Я сократил время таймера для тестов
+        object : CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                binding.buttonTimer.text = (millisUntilFinished / 1000).toString()
+                bindingDistributionRoles.buttonTimer.text = (millisUntilFinished / 1000).toString()
             }
 
+//Здесь можешь работать с голосованием
             override fun onFinish() {
-                TODO("лэйаут сменяется на следующий & таймер начинает отчёт сначала")
+                setContentView(bindingNight.root)
+                val manager = LinearLayoutManager(applicationContext)
+                //Ещё часть кода (обработка нажатия кнопок, кол-во проголосовавших) смотреть в VotingAdapter.kt
+                val adapter = VotingAdapter()
+                //Здесь заносишь игроков для голосования через MutableList
+                adapter.playersList = mutableListOf("dmi3chh", "Dm1trofan", "visokaya", "nikonova_dn")
+                    /*
+                     *  Допустим, у тебя есть переменная playersInRoom <List<Player>>, которая хранит информацию о всех игроках в комнате.
+                     *  Подсоси оттуда всех игроков, role которых Mafia и alive true. Передай этот MutableList в playersList.
+                     */
+
+                bindingNight.recyclerViewVoting.layoutManager = manager
+                bindingNight.recyclerViewVoting.adapter = adapter
             }
         }.start()
-
-        setContentView(binding.root)
     }
     private fun fetchPlayerData() {
         val playerRef = database.reference.child("rooms").child(roomId).child("players").child(userPlayerId)
@@ -78,15 +96,15 @@ class GameCycleMultiplayer : AppCompatActivity() {
                     Log.i(TAG, "role: $role")
                     if (role == Player.Role.Mafia.toString()){
                         // Отображаем роль игрока в textViewRole
-                        binding.imageButtonRole.setImageResource(R.drawable.role_mafia)
-                        binding.imageButtonRole.visibility = View.VISIBLE
-                        binding.textViewRole.text = "Вы Мафия"
+                        bindingDistributionRoles.imageButtonRole.setImageResource(R.drawable.role_mafia)
+                        bindingDistributionRoles.imageButtonRole.visibility = View.VISIBLE
+                        bindingDistributionRoles.textViewRole.text = "Вы Мафия"
                     }
                     if (role == Player.Role.Civilian.toString()){
                         // Отображаем роль игрока в textViewRole
-                        binding.imageButtonRole.setImageResource(R.drawable.citizens)
-                        binding.imageButtonRole.visibility = View.VISIBLE
-                        binding.textViewRole.text = "Вы мирный житель"
+                        bindingDistributionRoles.imageButtonRole.setImageResource(R.drawable.citizens)
+                        bindingDistributionRoles.imageButtonRole.visibility = View.VISIBLE
+                        bindingDistributionRoles.textViewRole.text = "Вы мирный житель"
                     }
                 }
             }
