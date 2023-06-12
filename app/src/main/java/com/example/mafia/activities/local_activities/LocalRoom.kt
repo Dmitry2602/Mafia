@@ -26,14 +26,14 @@ class LocalRoom : AppCompatActivity() {
 
         val manager = LinearLayoutManager(this)
         adapter = PlayerAdapter()
-        adapter.playersList = mutableListOf(preferences.getString(Preferences.PLAYER_TAG, null) ?: "Player1")
+        adapter.playersList = MutableList(4) {null}
 
         binding.recyclerViewPlayers.layoutManager = manager
         binding.recyclerViewPlayers.adapter = adapter
     }
 
     fun onClickButtonAddPlayer(view: View) {
-        adapter.playersList.add("")
+        adapter.playersList.add(null)
         binding.recyclerViewPlayers.adapter = adapter
     }
 

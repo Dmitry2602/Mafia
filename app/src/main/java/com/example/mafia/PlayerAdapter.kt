@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mafia.databinding.RecyclerViewPlayerBinding
 
 class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
-    var playersList: MutableList<String> = mutableListOf()
+    var playersList: MutableList<String?> = mutableListOf()
 
     inner class PlayerViewHolder(val binding: RecyclerViewPlayerBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -20,15 +20,16 @@ class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         val binding = RecyclerViewPlayerBinding.inflate(inflater, parent, false)
 
-        if (itemCount <= 4)
-            binding.imageButtonDeletePlayer.visibility = View.GONE
-
         return PlayerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         val player = playersList[position]
         val context = holder.itemView.context
+
+        if (itemCount <= 4)
+            holder.binding.imageButtonDeletePlayer.visibility = View.GONE
+
         holder.binding.editTextPlayer.doOnTextChanged { text, _, _, _ ->
             playersList[position] = text.toString()
         }
