@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.example.mafia.GameCycle
 import com.example.mafia.Preferences
 import com.example.mafia.databinding.ActivityMultiplayerMenuBinding
 import com.example.mafia.dialogs.JoinDialogFragment
@@ -27,7 +26,7 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
     private lateinit var player: Player
     private var roomId: String = ""
     private val roomIdLatch = CountDownLatch(1)
-    private var isGameCycleStarted = false // Флаг для отслеживания статуса перехода на GameCycle
+    private var isGameCycleMultiplayerStarted = false // Флаг для отслеживания статуса перехода на GameCycleMultiplayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,8 +79,8 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
     }
 
     private fun checkGameStatus() {
-        if (isGameCycleStarted) {
-            return // Остановка рекурсии, если уже был переход на GameCycle активити
+        if (isGameCycleMultiplayerStarted) {
+            return // Остановка рекурсии, если уже был переход на GameCycleMultiplayer активити
         }
 
         roomRef.child(roomId).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -92,13 +91,13 @@ class MultiplayerMenu : AppCompatActivity(), JoinDialogFragment.JoinDialogListen
                     Log.i(TAG, "gameStatus равен: $isGameStarted")
                     if (isGameStarted != null && isGameStarted) {
                         // Комната существует и игра уже началась
-                        isGameCycleStarted = true // Установка флага, что переход на GameCycle активити уже был
-                        val intent = Intent(applicationContext, GameCycle::class.java)
+                        isGameCycleMultiplayerStarted = true // Установка флага, что переход на GameCycleMultiplayer активити уже был
+                        val intent = Intent(applicationContext, GameCycleMultiplayer::class.java)
                         intent.putExtra("roomId", roomId)
                         startActivity(intent)
                     } else {
-                        if (isGameCycleStarted) {
-                            return // Остановка рекурсии, если уже был переход на GameCycle активити
+                        if (isGameCycleMultiplayerStarted) {
+                            return // Остановка рекурсии, если уже был переход на GameCycleMultiplayer активити
                         }
                         // Вызываем функцию до тех пор, пока не изменится gameStatus
                         checkGameStatus()
