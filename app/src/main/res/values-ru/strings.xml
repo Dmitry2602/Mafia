@@ -19,4 +19,15 @@
     <string name="buttonClose">Закрыть</string>
     <string name="textViewUsername">Псевдоним</string>
     <string name="buttonReset">Сбросить настройки</string>
+    <string name="textViewRoleReveal">Распределение ролей</string>
+    <string name="textViewGameEnd">Игра завершена</string>
+    <string name="buttonReturnToRoom">Вернуться в комнату</string>
+    <string name="buttonReturnToMenu">Вернуться в меню</string>
+    <string name="imageDescriptionRole">Роль</string>
+    <string name="imageDescriptionVictory">Победа</string>
+    <string name="imageDescriptionAddPlayer">Добавить игрока</string>
+    <string name="editTextEnterPlayersName">Введите имя игрока</string>
+    <string name="imageDescriptionDeletePlayer">Удалить игрока</string>
+    <string name="imageDescriptionPlayerToVote">Игрок для голосования</string>
+    <string name="imageDescriptionVoteResult">Результат голосования</string>
 </resources>

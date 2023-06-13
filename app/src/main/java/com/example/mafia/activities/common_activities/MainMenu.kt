@@ -6,7 +6,6 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.example.mafia.activities.multiplayer_activities.GameCycleMultiplayer
 import com.example.mafia.Preferences
 import com.example.mafia.activities.local_activities.LocalRoom
 import com.example.mafia.activities.multiplayer_activities.MultiplayerMenu

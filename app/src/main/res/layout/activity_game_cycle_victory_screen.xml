@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,102 +8,118 @@
     android:background="@color/background_gray"
     tools:context=".activities.multiplayer_activities.GameCycleMultiplayer">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewTitle"
+        android:importantForAccessibility="no"
+
+        app:srcCompat="@drawable/logo_title"
+
         android:layout_width="0dp"
         android:layout_height="95dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="70dp"
-        android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/logo_title" />
+
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp" />
 
     <View
         android:id="@+id/viewHorizontalLine"
+
+        android:background="@color/cream_gray"
+
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:background="@color/cream_gray"
+
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
 
-    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewVictory"
+
+        android:text="@string/textViewGameEnd"
+        android:textAppearance="@style/common_text"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Конец игры"
-        android:textAlignment="center"
-        android:textAppearance="@style/common_text"
-        android:textColor="@color/cream_gray"
+
+        app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
 
-    <ImageButton
+        android:layout_marginTop="8dp" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/imageButtonVictory"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="22dp"
+
         android:backgroundTint="@color/cream_gray"
+        android:contentDescription="@string/imageDescriptionVictory"
         android:clickable="false"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/textViewWin"
-        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
-        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/textViewVictory"
-        app:srcCompat="@drawable/victory_screen_mafia" />
 
-    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/textViewWin"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVictory"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewWin"
+
+        android:textAppearance="@style/common_text"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:text="Победа мафии"
-        android:textAlignment="center"
-        android:textAppearance="@style/common_text"
-        android:textColor="@color/cream_gray"
+
         app:layout_constraintBottom_toTopOf="@+id/buttonReturnToRoom"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine" />
+        app:layout_constraintHorizontal_bias="0.5"
+
+        android:layout_marginBottom="28dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonReturnToRoom"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
+        android:text="@string/buttonReturnToRoom"
+
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="28dp"
-        android:text="Вернуться в комнату"
+
         app:layout_constraintBottom_toTopOf="@+id/buttonReturnToMenu"
-        app:layout_constraintEnd_toEndOf="@+id/buttonReturnToMenu"
         app:layout_constraintStart_toStartOf="@+id/buttonReturnToMenu"
-        tools:ignore="VisualLintButtonSize" />
+        app:layout_constraintEnd_toEndOf="@+id/buttonReturnToMenu"
+
+        android:layout_marginBottom="28dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonReturnToMenu"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="32dp"
-        android:text="Вернуться в меню"
+        android:text="@string/buttonReturnToMenu"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        tools:ignore="VisualLintButtonSize" />
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

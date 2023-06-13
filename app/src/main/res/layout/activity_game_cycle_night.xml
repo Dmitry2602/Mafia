@@ -10,20 +10,20 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewTitle"
+        android:importantForAccessibility="no"
 
         app:srcCompat="@drawable/logo_title"
 
         android:layout_width="0dp"
         android:layout_height="95dp"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="70dp"
         android:layout_marginTop="50dp"
-    />
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp" />
 
     <View
         android:id="@+id/viewHorizontalLine"
@@ -33,20 +33,18 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
-        android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-    />
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewNight"
 
-        style="@style/common_text"
-        android:text="Ночь"
+        android:textAppearance="@style/common_text"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,8 +53,7 @@
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine"
 
-        android:layout_marginTop="8dp"
-    />
+        android:layout_marginTop="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewVoting"
@@ -70,8 +67,7 @@
 
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginTop="8dp"
-    />
+        android:layout_marginTop="8dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonTimer"
@@ -86,7 +82,6 @@
 
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="32dp"
-    />
+        android:layout_marginBottom="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

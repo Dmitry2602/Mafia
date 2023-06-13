@@ -27,7 +27,7 @@ class GameSettings : AppCompatActivity() {
     }
 
     fun onClickCloseSettings(view: View) {
-        if (binding.editTextUsername.text.isEmpty())
+        if (binding.editTextUsername.text.isNullOrEmpty())
             binding.editTextUsername.setText(username)
         finish()
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,83 +8,69 @@
     android:background="@color/background_gray"
     tools:context=".activities.common_activities.GameHowToPlay">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewTitle"
+        android:importantForAccessibility="no"
+
+        app:srcCompat="@drawable/logo_title"
+
         android:layout_width="0dp"
         android:layout_height="95dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="70dp"
-        android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/logo_title" />
+
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp" />
 
     <View
         android:id="@+id/viewHorizontalLine"
+
+        android:background="@color/cream_gray"
+
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:background="@color/cream_gray"
+
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
 
-    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewRoomCode"
+
+        android:text="@string/buttonHowToPlay"
+        android:textAppearance="@style/common_text"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/buttonHowToPlay"
-        android:textAlignment="center"
-        android:textAppearance="@style/common_text"
-        android:textColor="@color/cream_gray"
-        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+        android:layout_marginTop="8dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonCloseSettings"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="32dp"
-        android:onClick="onClickCloseRules"
         android:text="@string/buttonBack"
+        android:onClick="onClickCloseRules"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        tools:ignore="VisualLintButtonSize" />
-
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="294dp"
-        android:layout_height="463dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCloseSettings"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
-        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRoomCode">
 
-        <TextView
-            android:id="@+id/textView_rules"
-            style="@style/button_text"
-            android:layout_width="300dp"
-            android:layout_height="450dp"
-            android:background="@color/cream_gray"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:scrollbarAlwaysDrawVerticalTrack="false"
-            android:scrollbarStyle="outsideInset"
-            android:scrollbars="none"
-            android:text="@string/rulesText"
-            android:textAlignment="viewStart"
-            android:textSize="22sp" />
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp" />
 
-    </ScrollView>
+    <!-- ViewPager, описывающий, как играть -->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

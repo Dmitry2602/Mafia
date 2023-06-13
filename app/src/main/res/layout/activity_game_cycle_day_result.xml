@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/almost_black"
+    android:background="@color/background_gray"
     tools:context=".activities.multiplayer_activities.GameCycleMultiplayer">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -42,7 +42,7 @@
         android:layout_marginEnd="50dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewPlayersTurn"
+        android:id="@+id/textViewDay"
 
         android:textAppearance="@style/common_text"
 
@@ -50,20 +50,51 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine"
-        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
 
         android:layout_marginTop="8dp" />
 
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/imageButtonVoteResult"
+
+        android:backgroundTint="@color/cream_gray"
+        android:contentDescription="@string/imageDescriptionVoteResult"
+        android:clickable="false"
+        android:scaleType="fitCenter"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        app:layout_constraintTop_toBottomOf="@+id/textViewDay"
+        app:layout_constraintBottom_toTopOf="@+id/textViewVoteResult"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewVoteResult"
+
+        android:textAppearance="@style/common_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintBottom_toTopOf="@+id/buttonTimer"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        android:layout_marginBottom="28dp" />
+
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonStartTurn"
+        android:id="@+id/buttonTimer"
         tools:ignore="VisualLintButtonSize"
 
         style="@style/button"
-        android:text="@string/buttonStartTurn"
-
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:clickable="false"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"

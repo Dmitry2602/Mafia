@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,75 +9,78 @@
     android:backgroundTint="#232323"
     tools:context=".activities.common_activities.MainMenu">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewTitle"
+
+        app:srcCompat="@drawable/logo_title"
+
         android:layout_width="0dp"
         android:layout_height="95dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="50dp"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/logo_title" />
+
+        android:layout_marginTop="95dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLocalGame"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="95dp"
-        android:layout_marginEnd="22dp"
-        android:onClick="onClickButtonLocalGame"
         android:text="@string/buttonLocalGame"
+        android:onClick="onClickButtonLocalGame"
+
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle"
         app:layout_constraintEnd_toEndOf="@+id/imageViewTitle"
         app:layout_constraintStart_toStartOf="@+id/imageViewTitle"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle"
-        tools:ignore="VisualLintButtonSize" />
+
+        android:layout_marginTop="95dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonMultiplayerGame"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp"
-        android:onClick="onClickButtonMultiplayerGame"
         android:text="@string/buttonMultiplayerGame"
-        app:layout_constraintEnd_toEndOf="@+id/buttonLocalGame"
-        app:layout_constraintStart_toStartOf="@+id/buttonLocalGame"
+        android:onClick="onClickButtonMultiplayerGame"
+
         app:layout_constraintTop_toBottomOf="@+id/buttonLocalGame"
-        tools:ignore="VisualLintButtonSize" />
+        app:layout_constraintStart_toStartOf="@+id/buttonLocalGame"
+        app:layout_constraintEnd_toEndOf="@+id/buttonLocalGame"
+
+        android:layout_marginTop="28dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonHowToPlay"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp"
-        android:onClick="onClickButtonRules"
         android:text="@string/buttonHowToPlay"
-        app:layout_constraintEnd_toEndOf="@+id/buttonMultiplayerGame"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/buttonMultiplayerGame"
+        android:onClick="onClickButtonRules"
+
         app:layout_constraintTop_toBottomOf="@+id/buttonMultiplayerGame"
-        tools:ignore="VisualLintButtonSize" />
+        app:layout_constraintStart_toStartOf="@+id/buttonMultiplayerGame"
+        app:layout_constraintEnd_toEndOf="@+id/buttonMultiplayerGame"
+
+        android:layout_marginTop="28dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSettings"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp"
-        android:onClick="onClickButtonSettings"
         android:text="@string/buttonSetting"
-        app:layout_constraintEnd_toEndOf="@+id/buttonHowToPlay"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/buttonHowToPlay"
+        android:onClick="onClickButtonSettings"
+
         app:layout_constraintTop_toBottomOf="@+id/buttonHowToPlay"
-        tools:ignore="VisualLintButtonSize" />
+        app:layout_constraintStart_toStartOf="@+id/buttonHowToPlay"
+        app:layout_constraintEnd_toEndOf="@+id/buttonHowToPlay"
+
+        android:layout_marginTop="28dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

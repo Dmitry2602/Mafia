@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,56 +8,66 @@
     android:background="@color/background_gray"
     tools:context=".activities.multiplayer_activities.MultiplayerRoom">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewTitle"
+        android:importantForAccessibility="no"
+
+        app:srcCompat="@drawable/logo_title"
+
         android:layout_width="0dp"
         android:layout_height="95dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="70dp"
-        android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/logo_title" />
+
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp" />
 
     <View
         android:id="@+id/viewHorizontalLine"
+
+        android:background="@color/cream_gray"
+
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-        android:background="@color/cream_gray"
+
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTitle" />
 
-    <TextView
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewRoomCode"
+
+        android:textAppearance="@style/common_text"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textAlignment="center"
-        android:textAppearance="@style/common_text"
-        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine" />
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        android:layout_marginTop="8dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonStartGame"
+        tools:ignore="VisualLintButtonSize"
+
         style="@style/button"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="32dp"
         android:text="@string/buttonStartGame"
+
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
-        tools:ignore="VisualLintButtonSize" />
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

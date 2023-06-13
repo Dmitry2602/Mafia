@@ -22,8 +22,7 @@
 
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp"
-        android:layout_marginTop="50dp"
-    />
+        android:layout_marginTop="50dp" />
 
     <View
         android:id="@+id/viewHorizontalLine"
@@ -39,8 +38,7 @@
 
         android:layout_marginStart="50dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="50dp"
-    />
+        android:layout_marginEnd="50dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewLocalGame"
@@ -55,8 +53,7 @@
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine"
 
-        android:layout_marginTop="8dp"
-    />
+        android:layout_marginTop="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPlayers"
@@ -70,8 +67,7 @@
 
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginTop="8dp"
-    />
+        android:layout_marginTop="8dp" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/imageButtonAddPlayer"
@@ -79,16 +75,16 @@
         android:src="@drawable/add_player"
         android:background="@drawable/circle"
         android:onClick="onClickButtonAddPlayer"
+        android:contentDescription="@string/imageDescriptionAddPlayer"
 
-        android:layout_height="40dp"
-        android:layout_width="40dp"
+        android:layout_height="48dp"
+        android:layout_width="48dp"
 
         app:layout_constraintStart_toStartOf="@id/viewHorizontalLine"
         app:layout_constraintEnd_toEndOf="@id/viewHorizontalLine"
         app:layout_constraintTop_toBottomOf="@id/recyclerViewPlayers"
 
-        android:layout_marginTop="8dp"
-    />
+        android:layout_marginTop="8dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonStartGame"
@@ -104,7 +100,6 @@
 
         android:layout_marginStart="22dp"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="32dp"
-    />
+        android:layout_marginBottom="32dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -26,6 +26,8 @@ class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
         val player = playersList[position]
         val context = holder.itemView.context
 
+        holder.binding.editTextPlayer.setText(playersList[position])
+
         if (itemCount <= 4)
             holder.binding.imageButtonDeletePlayer.visibility = View.GONE
 
