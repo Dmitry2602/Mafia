@@ -102,7 +102,7 @@ class GameCycleMultiplayer : AppCompatActivity() {
                     }
                     if (role == Player.Role.Civilian.toString()){
                         // Отображаем роль игрока в textViewRole
-                        bindingDistributionRoles.imageButtonRole.setImageResource(R.drawable.citizens)
+                        bindingDistributionRoles.imageButtonRole.setImageResource(R.drawable.role_citizens)
                         bindingDistributionRoles.imageButtonRole.visibility = View.VISIBLE
                         bindingDistributionRoles.textViewRole.text = "Вы мирный житель"
                     }

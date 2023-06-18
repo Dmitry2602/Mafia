@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,49 +13,40 @@
         android:screenOrientation="portrait"
         android:theme="@style/Theme.Mafia"
         tools:targetApi="31">
-
+        <activity
+            android:name=".activities.local_activities.DayNight"
+            android:exported="false" />
+        <activity
+            android:name=".activities.local_activities.DistributionRoles"
+            android:exported="false" />
         <activity
             android:name=".activities.common_activities.MainMenu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-            <activity
-                android:name=".activities.common_activities.GameSettings"
-                android:exported="false"
-            />
-
-            <activity
-                android:name=".activities.common_activities.GameHowToPlay"
-                android:exported="false"
-            />
-
-            <activity
-                android:name=".activities.local_activities.LocalRoom"
-                android:exported="false"
-                android:windowSoftInputMode="adjustPan|adjustResize"
-            />
-                <activity
-                    android:name=".activities.local_activities.GameCycleLocal"
-                    android:exported="false"
-                />
-
-            <activity
-                android:name=".activities.multiplayer_activities.MultiplayerMenu"
-                android:exported="false"
-            />
-                <activity
-                    android:name=".activities.multiplayer_activities.MultiplayerRoom"
-                    android:exported="false"
-                />
-                    <activity
-                        android:name=".activities.multiplayer_activities.GameCycleMultiplayer"
-                        android:exported="false"
-                    />
-
+        <activity
+            android:name=".activities.common_activities.GameSettings"
+            android:exported="false" />
+        <activity
+            android:name=".activities.common_activities.GameHowToPlay"
+            android:exported="false" />
+        <activity
+            android:name=".activities.local_activities.LocalRoom"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".activities.multiplayer_activities.MultiplayerMenu"
+            android:exported="false" />
+        <activity
+            android:name=".activities.multiplayer_activities.MultiplayerRoom"
+            android:exported="false" />
+        <activity
+            android:name=".activities.multiplayer_activities.GameCycleMultiplayer"
+            android:exported="false" />
     </application>
 
 </manifest>
