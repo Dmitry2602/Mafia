@@ -35,4 +35,8 @@
     <string name="textViewTurn">Ход %s</string>
     <string name="textViewDay">День %d</string>
     <string name="textViewNight">Ночь %d</string>
+    <string name="textViewPlayerWasKilled">%s был убит</string>
+    <string name="textViewPlayerWasKicked">%s был изгнан</string>
+    <string name="textViewMafiaWon">Мафия победила</string>
+    <string name="textViewCivilianWon">Гражданские победили</string>
 </resources>

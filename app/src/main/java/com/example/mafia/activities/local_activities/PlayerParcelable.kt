@@ -4,25 +4,33 @@ import android.os.Parcel
 import android.os.Parcelable
 
 open class PlayerParcelable(
-    var playerId: Int,
+    var id: Int,
     val username: String?,
     var role: String?,
-    val isAlive: Boolean,
-    var gotVotes: Int,
+    var wasKilled: Boolean,
+    var wasKicked: Boolean,
+    var gotVotes: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readByte() != 0.toByte(),
+        parcel.readByte() != 0.toByte(),
         parcel.readInt()
     )
 
+    enum class Role {
+        Mafia,
+        Civilian
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(playerId)
+        parcel.writeInt(id)
         parcel.writeString(username)
         parcel.writeString(role)
-        parcel.writeByte(if (isAlive) 1 else 0)
+        parcel.writeByte(if (wasKilled) 1 else 0)
+        parcel.writeByte(if (wasKicked) 1 else 0)
         parcel.writeInt(gotVotes)
     }
 
@@ -39,11 +47,4 @@ open class PlayerParcelable(
             return arrayOfNulls(size)
         }
     }
-
 }
-
-
-
-
-
-

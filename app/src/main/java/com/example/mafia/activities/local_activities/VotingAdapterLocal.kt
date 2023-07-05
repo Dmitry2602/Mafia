@@ -30,14 +30,18 @@ class VotingAdapterLocal : RecyclerView.Adapter<VotingAdapterLocal.VoteViewHolde
         val inflater = LayoutInflater.from(parent.context)
         val binding = RecyclerViewVoteBinding.inflate(inflater, parent, false)
 
-        binding.imageViewVotes.isVisible = false
-
         return VoteViewHolder(binding)
     }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: VoteViewHolder, position: Int) {
         holder.binding.buttonVote.text = playersList[position].username
+
+        holder.binding.imageViewVotes.text = (playersList[position].gotVotes).toString()
+        if (playersList[position].gotVotes > 0) {
+            holder.binding.imageViewVotes.visibility = View.VISIBLE
+        } else
+            holder.binding.imageViewVotes.visibility = View.INVISIBLE
 
         holder.binding.buttonVote.setOnClickListener {
             listener.restoreRecyclerView()
