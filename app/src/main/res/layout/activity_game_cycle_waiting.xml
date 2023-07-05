@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/almost_black"
-    tools:context=".activities.multiplayer_activities.GameCycleMultiplayer">
+    tools:context=".activities.local_activities.DistributionRoles">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewTitle"
@@ -42,7 +42,7 @@
         android:layout_marginEnd="50dp" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewPlayersTurn"
+        android:id="@+id/textViewGamePhase"
 
         android:textAppearance="@style/common_text"
 
@@ -50,6 +50,20 @@
         android:layout_height="wrap_content"
 
         app:layout_constraintTop_toBottomOf="@+id/viewHorizontalLine"
+        app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
+        app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
+
+        android:layout_marginTop="8dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPlayersTurn"
+
+        android:textAppearance="@style/common_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintTop_toBottomOf="@+id/textViewGamePhase"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
 

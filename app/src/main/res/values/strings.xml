@@ -36,4 +36,13 @@
     <string name="imageDescriptionDeletePlayer">Delete player</string>
     <string name="imageDescriptionPlayerToVote">Player to vote</string>
     <string name="imageDescriptionVoteResult">Vote result</string>
+    <string name="textViewYouAreMafia">You are Mafia</string>
+    <string name="textViewYouAreCivilian">You are Civilian</string>
+    <string name="textViewTurn">Turn %s</string>
+    <string name="textViewDay">Day %d</string>
+    <string name="textViewNight">Night %d</string>
+    <string name="textViewPlayerWasKilled">%s was killed</string>
+    <string name="textViewPlayerWasKicked">%s was kicked</string>
+    <string name="textViewMafiaWon">Mafia won</string>
+    <string name="textViewCivilianWon">Civilian won</string>
 </resources>

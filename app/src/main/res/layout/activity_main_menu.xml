@@ -56,20 +56,6 @@
         android:layout_marginTop="28dp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonHowToPlay"
-        tools:ignore="VisualLintButtonSize"
-
-        style="@style/button"
-        android:text="@string/buttonHowToPlay"
-        android:onClick="onClickButtonRules"
-
-        app:layout_constraintTop_toBottomOf="@+id/buttonMultiplayerGame"
-        app:layout_constraintStart_toStartOf="@+id/buttonMultiplayerGame"
-        app:layout_constraintEnd_toEndOf="@+id/buttonMultiplayerGame"
-
-        android:layout_marginTop="28dp" />
-
-    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSettings"
         tools:ignore="VisualLintButtonSize"
 
@@ -77,9 +63,9 @@
         android:text="@string/buttonSetting"
         android:onClick="onClickButtonSettings"
 
-        app:layout_constraintTop_toBottomOf="@+id/buttonHowToPlay"
-        app:layout_constraintStart_toStartOf="@+id/buttonHowToPlay"
-        app:layout_constraintEnd_toEndOf="@+id/buttonHowToPlay"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMultiplayerGame"
+        app:layout_constraintStart_toStartOf="@+id/buttonMultiplayerGame"
+        app:layout_constraintEnd_toEndOf="@+id/buttonMultiplayerGame"
 
         android:layout_marginTop="28dp" />
 

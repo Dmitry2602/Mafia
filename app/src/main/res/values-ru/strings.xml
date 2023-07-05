@@ -30,4 +30,13 @@
     <string name="imageDescriptionDeletePlayer">Удалить игрока</string>
     <string name="imageDescriptionPlayerToVote">Игрок для голосования</string>
     <string name="imageDescriptionVoteResult">Результат голосования</string>
+    <string name="textViewYouAreMafia">Вы Мафия</string>
+    <string name="textViewYouAreCivilian">Вы Гражданский</string>
+    <string name="textViewTurn">Ход %s</string>
+    <string name="textViewDay">День %d</string>
+    <string name="textViewNight">Ночь %d</string>
+    <string name="textViewPlayerWasKilled">%s был убит</string>
+    <string name="textViewPlayerWasKicked">%s был изгнан</string>
+    <string name="textViewMafiaWon">Мафия победила</string>
+    <string name="textViewCivilianWon">Гражданские победили</string>
 </resources>
