@@ -6,7 +6,10 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.View
 import com.example.mafia.Preferences
+import com.example.mafia.Preferences.GAME_DATA
+import com.example.mafia.Preferences.TABLE_NAME
 import com.example.mafia.Preferences.saveGameData
 import com.example.mafia.R
 import com.example.mafia.activities.multiplayer_activities.Player
@@ -24,89 +27,86 @@ class DayResults : AppCompatActivity() {
         binding = ActivityGameCycleDayResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
+        preferences = getSharedPreferences(TABLE_NAME, Context.MODE_PRIVATE)
         val gson = Gson()
-        val json = preferences.getString(Preferences.GAME_DATA, null)
+        val json = preferences.getString(GAME_DATA, null)
         gameInfo = gson.fromJson(json, GameInfo::class.java)
 
         val kickedPlayer: PlayerParcelable? = gameInfo.players.find { it.wasKicked }
         val killedPlayer: PlayerParcelable? = gameInfo.players.find { it.wasKilled }
 
-        binding.buttonTimer.isClickable = true
-        binding.buttonTimer.setOnClickListener {
-            if (killedPlayer == null) {
-                gameInfo.gamePhase = GameInfo.GamePhases.Night.toString()
-                gameInfo.turn += 1
-            } else
-                gameInfo.gamePhase = GameInfo.GamePhases.MafiaResult.toString()
-
-            if (kickedPlayer != null)
-                gameInfo.players.remove(kickedPlayer)
-            else if (killedPlayer != null) {
-                gameInfo.gamePhase = GameInfo.GamePhases.Night.toString()
-                gameInfo.turn += 1
-                gameInfo.players.remove(killedPlayer)
-            }
-
-            saveGameData(gameInfo)
-            intent = Intent(applicationContext, DayNight::class.java)
-
-            when (gameInfo.players.count { it.role == Player.Role.Mafia.toString() }) {
-                0 -> {
-                    intent = Intent(applicationContext, GameOver::class.java)
-                    intent.putExtra(Preferences.WINNER_ROLE, Player.Role.Civilian.toString())
-                }
-
-                1 -> {
-                    if (gameInfo.players.size == 2) {
-                        intent = Intent(applicationContext, GameOver::class.java)
-                        intent.putExtra(Preferences.WINNER_ROLE, Player.Role.Mafia.toString())
-                    }
-                }
-
-                in gameInfo.players.size / 2 + 1..gameInfo.players.size -> {
-                    intent = Intent(applicationContext, GameOver::class.java)
-                    intent.putExtra(Preferences.WINNER_ROLE, Player.Role.Mafia.toString())
-                }
-            }
-            intent.putExtra(Preferences.PLAYER_DATA, gameInfo.players.last())
-            startActivity(intent)
-            finish()
-            overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
-        }
 
         when (gameInfo.gamePhase) {
-            GameInfo.GamePhases.GeneralResult.toString() -> {
-                binding.imageButtonVoteResult.setImageResource(R.drawable.kicked_player)
-                binding.textViewVoteResult.text =
-                    getString(R.string.textViewPlayerWasKicked, kickedPlayer!!.username)
-                object : CountDownTimer(60_000, 1_000) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        binding.buttonTimer.text =
-                            (millisUntilFinished / 1000).toString()
-                    }
-
-                    override fun onFinish() {
-                        binding.buttonTimer.callOnClick()
-                    }
-                }.start()
-            }
-
             GameInfo.GamePhases.MafiaResult.toString() -> {
-                binding.imageButtonVoteResult.setImageResource(R.drawable.dead_player)
-                binding.textViewVoteResult.text =
-                    getString(R.string.textViewPlayerWasKilled, killedPlayer!!.username)
-                object : CountDownTimer(60_000, 1_000) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        binding.buttonTimer.text =
-                            (millisUntilFinished / 1000).toString()
+                if (killedPlayer != null) {
+                    binding.imageButtonVoteResult.setImageResource(R.drawable.dead_player)
+                    binding.textViewVoteResult.text = getString(R.string.textViewPlayerWasKilled, killedPlayer.username)
+                    gameInfo.players.remove(killedPlayer)
+                    gameInfo.players.forEachIndexed { index, player ->
+                        player.id = index
                     }
+                } else {
+                    binding.imageButtonVoteResult.visibility = View.GONE
+                    binding.textViewVoteResult.text = getString(R.string.textNoOneWasKilled)
+                }
 
-                    override fun onFinish() {
-                        binding.buttonTimer.callOnClick()
+                binding.buttonContinue.setOnClickListener {
+                    gameInfo.gamePhase = GameInfo.GamePhases.Day.toString()
+                    saveGameData(gameInfo)
+
+                    intent = returnIntent()
+                    startActivity(intent)
+                    finish()
+                    overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
+                }
+            }
+            GameInfo.GamePhases.GeneralResult.toString() -> {
+                if (kickedPlayer != null) {
+                    binding.imageButtonVoteResult.setImageResource(R.drawable.kicked_player)
+                    binding.textViewVoteResult.text = getString(R.string.textViewPlayerWasKicked, kickedPlayer.username)
+                    gameInfo.players.remove(kickedPlayer)
+                    gameInfo.players.forEachIndexed { index, player ->
+                        player.id = index
                     }
-                }.start()
+                } else {
+                    binding.imageButtonVoteResult.visibility = View.GONE
+                    binding.textViewVoteResult.text = getString(R.string.textNoOneWasKicked)
+                }
+
+                binding.buttonContinue.setOnClickListener {
+                    gameInfo.gamePhase = GameInfo.GamePhases.Night.toString()
+                    gameInfo.turn += 1
+                    saveGameData(gameInfo)
+
+                    intent = returnIntent()
+                    startActivity(intent)
+                    finish()
+                    overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
+                }
             }
         }
+    }
+
+    private fun returnIntent(): Intent {
+        when (gameInfo.players.count { it.role == Player.Role.Mafia.toString() }) {
+            0 -> {
+                intent = Intent(applicationContext, GameOver::class.java)
+                intent.putExtra(Preferences.WINNER_ROLE, Player.Role.Civilian.toString())
+            }
+            1 -> {
+                if (gameInfo.players.size == 2) {
+                    intent = Intent(applicationContext, GameOver::class.java)
+                    intent.putExtra(Preferences.WINNER_ROLE, Player.Role.Mafia.toString())
+                } else {
+                    intent = Intent(applicationContext, DayNight::class.java)
+                }
+            }
+            in gameInfo.players.size / 2 + 1..gameInfo.players.size -> {
+                intent = Intent(applicationContext, GameOver::class.java)
+                intent.putExtra(Preferences.WINNER_ROLE, Player.Role.Mafia.toString())
+            }
+            else -> intent = Intent(applicationContext, DayNight::class.java)
+        }
+        return intent
     }
 }

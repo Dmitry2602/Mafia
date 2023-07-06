@@ -45,4 +45,7 @@
     <string name="textViewPlayerWasKicked">%s was kicked</string>
     <string name="textViewMafiaWon">Mafia won</string>
     <string name="textViewCivilianWon">Civilian won</string>
+    <string name="buttonContinue">Continue</string>
+    <string name="textNoOneWasKilled">No one was killed</string>
+    <string name="textNoOneWasKicked">No one was kicked</string>
 </resources>

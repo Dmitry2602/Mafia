@@ -13,6 +13,7 @@ class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
 
     interface RecyclerViewChangedListener {
         fun sendItemCount(itemCount: Int)
+        fun sendTextChanged(text: String)
     }
 
     inner class PlayerViewHolder(val binding: RecyclerViewPlayerBinding) :
@@ -40,6 +41,7 @@ class PlayerAdapter : RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
 
         holder.binding.editTextPlayer.doOnTextChanged { text, _, _, _ ->
             playersList[position] = text.toString()
+            listener.sendTextChanged(text.toString())
         }
 
         holder.binding.imageButtonDeletePlayer.setOnClickListener {

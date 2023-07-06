@@ -83,18 +83,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toTopOf="@+id/buttonTimer"
+        app:layout_constraintBottom_toTopOf="@+id/buttonContinue"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"
         app:layout_constraintEnd_toEndOf="@+id/viewHorizontalLine"
 
         android:layout_marginBottom="28dp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonTimer"
+        android:id="@+id/buttonContinue"
         tools:ignore="VisualLintButtonSize"
 
         style="@style/button"
-        android:clickable="false"
+        android:text="@string/buttonContinue"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/viewHorizontalLine"

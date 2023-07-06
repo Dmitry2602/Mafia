@@ -19,7 +19,6 @@ import com.example.mafia.Preferences.TABLE_NAME
 import com.example.mafia.Preferences.WINNER_ROLE
 import com.example.mafia.Preferences.saveGameData
 import com.example.mafia.R
-import com.example.mafia.activities.multiplayer_activities.Player
 import com.example.mafia.databinding.ActivityGameCycleDayResultBinding
 import com.example.mafia.databinding.ActivityGameCycleNightBinding
 import com.example.mafia.databinding.ActivityGameCycleWaitingBinding
@@ -28,7 +27,6 @@ import com.google.gson.Gson
 class DayNight : AppCompatActivity(), VotingAdapterLocal.RecyclerViewRevotedListener {
     private lateinit var bindingWaiting: ActivityGameCycleWaitingBinding
     private lateinit var bindingVote: ActivityGameCycleNightBinding
-    private lateinit var bindingResult: ActivityGameCycleDayResultBinding
 
     private lateinit var preferences: SharedPreferences
     private lateinit var gameInfo: GameInfo
@@ -48,7 +46,7 @@ class DayNight : AppCompatActivity(), VotingAdapterLocal.RecyclerViewRevotedList
         val voted = bindingVote.recyclerViewVoting.children.find { !it.findViewById<TextView>(R.id.buttonVote).isEnabled }
         if (voted != null) {
             val player = gameInfo.players.find { it.username == voted.findViewById<Button>(R.id.buttonVote).text.toString() }
-            gameInfo.players.asReversed()[player!!.id].gotVotes += 1
+            gameInfo.players[player!!.id].gotVotes += 1
         }
     }
 
@@ -61,10 +59,9 @@ class DayNight : AppCompatActivity(), VotingAdapterLocal.RecyclerViewRevotedList
         val gson = Gson()
         val json = preferences.getString(GAME_DATA, null)
         gameInfo = gson.fromJson(json, GameInfo::class.java)
-        currentPlayer = intent.getParcelableExtra(PLAYER_DATA)!!
+        currentPlayer = gameInfo.players.first()
 
         setContentView(bindingWaiting.root)
-
         bindingWaiting.textViewPlayersTurn.text = getString(R.string.textViewTurn, currentPlayer.username)
         when (gameInfo.gamePhase) {
             GameInfo.GamePhases.Night.toString() ->
@@ -72,17 +69,14 @@ class DayNight : AppCompatActivity(), VotingAdapterLocal.RecyclerViewRevotedList
             GameInfo.GamePhases.Day.toString() ->
                 bindingWaiting.textViewGamePhase.text = getString(R.string.textViewDay, gameInfo.turn)
         }
-        bindingWaiting.buttonStartTurn.setOnClickListener { startTurn() }
+        startTurn()
 
         bindingVote.buttonTimer.isClickable = true
         bindingVote.buttonTimer.setOnClickListener {
-            when (gameInfo.gamePhase) {
-                GameInfo.GamePhases.Night.toString() -> {
-                    if (currentPlayer.role == Player.Role.Mafia.toString())
-                        calculateVotes()
-                    saveGameData(gameInfo)
-
-                    if (currentPlayer.id == gameInfo.players.first().id) {
+            countDownTimer.cancel()
+            if (currentPlayer == gameInfo.players.last()) {
+                when (gameInfo.gamePhase) {
+                    GameInfo.GamePhases.Night.toString() -> {
                         gameInfo.gamePhase = GameInfo.GamePhases.Day.toString()
                         val max = gameInfo.players.maxBy { it.gotVotes }.gotVotes
                         var victimCounter = 0
@@ -93,19 +87,19 @@ class DayNight : AppCompatActivity(), VotingAdapterLocal.RecyclerViewRevotedList
                             }
                             player.gotVotes = 0
                         }
-                        if (victimCounter > 1) {
-                            gameInfo.players.forEach { player ->
-                                player.wasKilled = false
-                            }
-                        }
+                        if (victimCounter > 1)
+                            gameInfo.players.forEach { it.wasKilled = false }
+
+                        gameInfo.gamePhase = GameInfo.GamePhases.MafiaResult.toString()
+                        saveGameData(gameInfo)
+
+                        intent = Intent(applicationContext, DayResults::class.java)
+                        startActivity(intent)
+                        finish()
+                        overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
                     }
-                }
 
-                GameInfo.GamePhases.Day.toString() -> {
-                    calculateVotes()
-                    saveGameData(gameInfo)
-
-                    if (currentPlayer.id == gameInfo.players.first().id) {
+                    GameInfo.GamePhases.Day.toString() -> {
                         val max = gameInfo.players.maxBy { it.gotVotes }.gotVotes
                         var victimCounter = 0
                         gameInfo.players.forEach { player ->
@@ -115,108 +109,95 @@ class DayNight : AppCompatActivity(), VotingAdapterLocal.RecyclerViewRevotedList
                             }
                             player.gotVotes = 0
                         }
-                        if (victimCounter > 1) {
-                            gameInfo.players.forEach { player ->
-                                player.wasKicked = false
-                            }
-                        }
+                        if (victimCounter > 1)
+                            gameInfo.players.forEach { it.wasKicked = false }
+
+                        gameInfo.gamePhase = GameInfo.GamePhases.GeneralResult.toString()
+                        saveGameData(gameInfo)
 
                         intent = Intent(applicationContext, DayResults::class.java)
-                        if (gameInfo.players.find { it.wasKicked } == null) {
-                            if (gameInfo.players.find { it.wasKilled } == null) {
-                                gameInfo.gamePhase = GameInfo.GamePhases.Night.toString()
-                                gameInfo.turn += 1
-                            }
-                            else {
-                                gameInfo.gamePhase = GameInfo.GamePhases.MafiaResult.toString()
-                                saveGameData(gameInfo)
-                                startActivity(intent)
-                            }
-                        } else {
-                            gameInfo.gamePhase = GameInfo.GamePhases.GeneralResult.toString()
-                            saveGameData(gameInfo)
-                            startActivity(intent)
-                        }
-                    }
-                }
-            }
-            saveGameData(gameInfo)
-            if (currentPlayer.id == gameInfo.players.first().id) {
-                gameInfo.players.forEach { player ->
-                    intent = Intent(applicationContext, DayNight::class.java)
-                    intent.putExtra(PLAYER_DATA, player)
-                    startActivity(intent)
-                    overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
-                }
-            }
-            finish()
-            overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
-        }
-    }
-    private fun startTurn() {
-        when (gameInfo.gamePhase) {
-            GameInfo.GamePhases.Night.toString() -> {
-                setContentView(bindingVote.root)
-                bindingVote.textViewNight.text = getString(R.string.textViewNight, gameInfo.turn)
-                when (currentPlayer.role) {
-                    Player.Role.Mafia.toString() -> {
-                        val manager = LinearLayoutManager(applicationContext)
-                        //Класс VotingAdapter отвечает за обработку и отображение Item в RecyclerView
-                        val adapter = VotingAdapterLocal()
-                        //В варианты для голосования у мафии добавляются все мирные живые жители
-                        adapter.playersList.addAll(
-                            buildList {
-                                gameInfo.players.forEach { player ->
-                                    if (player.role == Player.Role.Civilian.toString()
-                                        && !player.wasKilled
-                                        && !player.wasKicked) add(player)
-                                }
-                            }.reversed()
-                        )
-
-                        bindingVote.recyclerViewVoting.layoutManager = manager
-                        bindingVote.recyclerViewVoting.adapter = adapter
-                    }
-
-                    Player.Role.Civilian.toString() -> {
-                        //RecyclerView отсутствует у мирных жителей
-                        bindingVote.recyclerViewVoting.visibility = View.GONE
-                    }
-
-                }
-                object : CountDownTimer(10_000, 1_000) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        bindingVote.buttonTimer.text = (millisUntilFinished / 1000).toString()
-                    }
-
-                    override fun onFinish() {
-                        bindingVote.buttonTimer.callOnClick()
+                        startActivity(intent)
                         finish()
                         overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
                     }
-                }.start()
-            }
-            GameInfo.GamePhases.Day.toString() -> {
-                setContentView(bindingVote.root)
-                bindingVote.textViewNight.text = getString(R.string.textViewDay, gameInfo.turn)
-                val manager = LinearLayoutManager(applicationContext)
-                val adapter = VotingAdapterLocal()
-                //В вариантах для голосования все игроки
-                adapter.playersList.addAll(gameInfo.players.minus(gameInfo.players.find { it.id == currentPlayer.id }!!).reversed())
+                }
+            } else {
+                val isNight = gameInfo.gamePhase == GameInfo.GamePhases.Night.toString()
+                val isDay = !isNight
+                val currentPlayerIsMafia = currentPlayer.role == PlayerParcelable.Role.Mafia.toString()
 
-                bindingVote.recyclerViewVoting.layoutManager = manager
-                bindingVote.recyclerViewVoting.adapter = adapter
-
-                object : CountDownTimer(10_000, 1_000) {
-                    override fun onTick(millisUntilFinished: Long) {
-                        bindingVote.buttonTimer.text = (millisUntilFinished / 1000).toString()
-                    }
-
-                    override fun onFinish() {
-                        bindingVote.buttonTimer.callOnClick()
-                    }
-                }.start()
+                if ((isNight && currentPlayerIsMafia) || isDay)
+                    calculateVotes()
+                currentPlayer = gameInfo.players[currentPlayer.id + 1]
+                startTurn()
             }
         }
+    }
+    private fun startTurn() {
+        setContentView(bindingWaiting.root)
+        bindingWaiting.textViewPlayersTurn.text = getString(R.string.textViewTurn, currentPlayer.username)
+        when (gameInfo.gamePhase) {
+            GameInfo.GamePhases.Night.toString() ->
+                bindingWaiting.textViewGamePhase.text = getString(R.string.textViewNight, gameInfo.turn)
+            GameInfo.GamePhases.Day.toString() ->
+                bindingWaiting.textViewGamePhase.text = getString(R.string.textViewDay, gameInfo.turn)
+        }
+        bindingWaiting.buttonStartTurn.setOnClickListener {
+            bindingVote.recyclerViewVoting.visibility = View.VISIBLE
+            when (gameInfo.gamePhase) {
+                //Ход игры ночью
+                GameInfo.GamePhases.Night.toString() -> {
+                    setContentView(bindingVote.root)
+                    bindingVote.textViewNight.text = getString(R.string.textViewNight, gameInfo.turn)
+                    when (currentPlayer.role) {
+                        PlayerParcelable.Role.Mafia.toString() -> {
+                            val manager = LinearLayoutManager(applicationContext)
+                            //Класс VotingAdapter отвечает за обработку и отображение Item в RecyclerView
+                            val adapter = VotingAdapterLocal()
+                            //В варианты для голосования у мафии добавляются все мирные живые жители
+                            adapter.playersList.addAll(
+                                buildList {
+                                    gameInfo.players.forEach { player ->
+                                        if (player.role == PlayerParcelable.Role.Civilian.toString()
+                                            && !player.wasKilled
+                                            && !player.wasKicked) add(player)
+                                    }
+                                }
+                            )
+                            bindingVote.recyclerViewVoting.layoutManager = manager
+                            bindingVote.recyclerViewVoting.adapter = adapter
+                        }
+
+                        PlayerParcelable.Role.Civilian.toString() -> {
+                            //RecyclerView отсутствует у мирных жителей
+                            bindingVote.recyclerViewVoting.visibility = View.GONE
+                        }
+
+                    }
+                }
+
+                //Утреннее голосование
+                GameInfo.GamePhases.Day.toString() -> {
+                    setContentView(bindingVote.root)
+                    bindingVote.textViewNight.text = getString(R.string.textViewDay, gameInfo.turn)
+                    val manager = LinearLayoutManager(applicationContext)
+                    val adapter = VotingAdapterLocal()
+                    //В вариантах для голосования все игроки
+                    adapter.playersList.addAll(gameInfo.players.minus(currentPlayer))
+
+                    bindingVote.recyclerViewVoting.layoutManager = manager
+                    bindingVote.recyclerViewVoting.adapter = adapter
+                }
+            }
+            countDownTimer.start()
+        }
+    }
+
+    private val countDownTimer = object : CountDownTimer(10_000, 1_000) {
+        override fun onTick(millisUntilFinished: Long) {
+            val timeRemaining = (millisUntilFinished / 1000).toString()
+            bindingVote.buttonTimer.text = timeRemaining
+        }
+        override fun onFinish() { bindingVote.buttonTimer.callOnClick() }
     }
 }

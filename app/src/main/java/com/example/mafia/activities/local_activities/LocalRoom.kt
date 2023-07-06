@@ -11,17 +11,21 @@ import androidx.core.view.children
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mafia.PlayerAdapter
 import com.example.mafia.Preferences
+import com.example.mafia.Preferences.saveGameData
 import com.example.mafia.R
 import com.example.mafia.databinding.ActivityLocalRoomBinding
 
 class LocalRoom : AppCompatActivity(), PlayerAdapter.RecyclerViewChangedListener {
     private lateinit var binding: ActivityLocalRoomBinding
     private lateinit var adapter: PlayerAdapter
-
     private lateinit var preferences: SharedPreferences
 
     override fun sendItemCount(itemCount: Int) {
         binding.buttonStartGame.isEnabled = itemCount >= 4
+    }
+
+    override fun sendTextChanged(text: String) {
+        binding.buttonStartGame.isEnabled = text.isNotEmpty()
     }
 
     private val gameInfo = GameInfo(
@@ -39,8 +43,7 @@ class LocalRoom : AppCompatActivity(), PlayerAdapter.RecyclerViewChangedListener
 
         val manager = LinearLayoutManager(this)
         adapter = PlayerAdapter()
-        adapter.playersList = //MutableList(4) {null}
-            MutableList(6) { "Player ${it + 1}" }
+        adapter.playersList = MutableList(4) {null}
 
         binding.recyclerViewPlayers.layoutManager = manager
         binding.recyclerViewPlayers.adapter = adapter
@@ -77,15 +80,10 @@ class LocalRoom : AppCompatActivity(), PlayerAdapter.RecyclerViewChangedListener
                 )
             )
         }
-        gameInfo.players.reverse()
 
-        Preferences.saveGameData(gameInfo)
-
-        gameInfo.players.forEach { player ->
-            val intent = Intent(this, DistributionRoles::class.java)
-            intent.putExtra(Preferences.PLAYER_DATA, player)
-            startActivity(intent)
-            overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
-        }
+        saveGameData(gameInfo)
+        val intent = Intent(this, DistributionRoles::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
     }
 }

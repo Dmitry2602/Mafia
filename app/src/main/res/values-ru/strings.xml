@@ -31,12 +31,15 @@
     <string name="imageDescriptionPlayerToVote">Игрок для голосования</string>
     <string name="imageDescriptionVoteResult">Результат голосования</string>
     <string name="textViewYouAreMafia">Вы Мафия</string>
-    <string name="textViewYouAreCivilian">Вы Гражданский</string>
+    <string name="textViewYouAreCivilian">Вы Мирный</string>
     <string name="textViewTurn">Ход %s</string>
     <string name="textViewDay">День %d</string>
     <string name="textViewNight">Ночь %d</string>
     <string name="textViewPlayerWasKilled">%s был убит</string>
     <string name="textViewPlayerWasKicked">%s был изгнан</string>
     <string name="textViewMafiaWon">Мафия победила</string>
-    <string name="textViewCivilianWon">Гражданские победили</string>
+    <string name="textViewCivilianWon">Мирные победили</string>
+    <string name="buttonContinue">Продолжить</string>
+    <string name="textNoOneWasKilled">Никто не был убит</string>
+    <string name="textNoOneWasKicked">Никто не был изгнан</string>
 </resources>

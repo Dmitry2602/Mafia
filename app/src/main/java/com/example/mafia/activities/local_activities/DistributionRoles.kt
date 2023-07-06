@@ -6,7 +6,9 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mafia.Preferences
+import com.example.mafia.Preferences.GAME_DATA
+import com.example.mafia.Preferences.TABLE_NAME
+import com.example.mafia.Preferences.saveGameData
 import com.example.mafia.R
 import com.example.mafia.activities.multiplayer_activities.Player
 import com.example.mafia.databinding.ActivityGameCycleDistributionRolesBinding
@@ -25,42 +27,44 @@ class DistributionRoles : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindingWaiting = ActivityGameCycleWaitingBinding.inflate(layoutInflater)
         bindingDistributionRoles = ActivityGameCycleDistributionRolesBinding.inflate(layoutInflater)
-        setContentView(bindingWaiting.root)
 
-        preferences = getSharedPreferences(Preferences.TABLE_NAME, Context.MODE_PRIVATE)
+        preferences = getSharedPreferences(TABLE_NAME, Context.MODE_PRIVATE)
         val gson = Gson()
-        var json = preferences.getString(Preferences.GAME_DATA, null)
+        val json = preferences.getString(GAME_DATA, null)
         gameInfo = gson.fromJson(json, GameInfo::class.java)
-        currentPlayer = intent.getParcelableExtra(Preferences.PLAYER_DATA)!!
+        currentPlayer = gameInfo.players.first()
 
         bindingDistributionRoles.buttonTimer.isClickable = true
         bindingDistributionRoles.buttonTimer.setOnClickListener {
-            if (gameInfo.gamePhase == GameInfo.GamePhases.Night.toString())
-                return@setOnClickListener
-            if (currentPlayer.id == gameInfo.players.first().id) {
+            countDownTimer.cancel()
+            if (currentPlayer == gameInfo.players.last()) {
                 gameInfo.turn = 1
                 gameInfo.gamePhase = GameInfo.GamePhases.Night.toString()
+                saveGameData(gameInfo)
 
-                Preferences.saveGameData(gameInfo)
-
-                gameInfo.players.forEach { player ->
-                    json = preferences.getString(Preferences.GAME_DATA, null)
-                    gameInfo = gson.fromJson(json, GameInfo::class.java)
-                    intent = Intent(applicationContext, DayNight::class.java)
-                    intent.putExtra(Preferences.PLAYER_DATA, player)
-                    startActivity(intent)
-                    overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
-                }
+                intent = Intent(applicationContext, DayNight::class.java)
+                startActivity(intent)
+                finish()
+                overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
+            } else {
+                currentPlayer = gameInfo.players[currentPlayer.id + 1]
+                startTurn()
             }
-            finish()
-            overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
-         }
-
+        }
+        setContentView(bindingWaiting.root)
         bindingWaiting.textViewPlayersTurn.text = getString(R.string.textViewTurn, currentPlayer.username)
         bindingWaiting.textViewGamePhase.text = getString(R.string.textViewRoleReveal)
+        startTurn()
+    }
+
+    private fun startTurn() {
+        if (currentPlayer != gameInfo.players.first()) {
+            setContentView(bindingWaiting.root)
+            bindingWaiting.textViewPlayersTurn.text = getString(R.string.textViewTurn, currentPlayer.username)
+            bindingWaiting.textViewGamePhase.text = getString(R.string.textViewRoleReveal)
+        }
         bindingWaiting.buttonStartTurn.setOnClickListener {
             setContentView(bindingDistributionRoles.root)
-
             when (currentPlayer.role) {
                 Player.Role.Mafia.toString() -> {
                     bindingDistributionRoles.imageButtonRole.setImageResource(R.drawable.role_mafia)
@@ -71,17 +75,15 @@ class DistributionRoles : AppCompatActivity() {
                     bindingDistributionRoles.textViewRole.setText(R.string.textViewYouAreCivilian)
                 }
             }
-            object : CountDownTimer(10_000, 1_000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    bindingDistributionRoles.buttonTimer.text = (millisUntilFinished / 1000).toString()
-                }
-
-                override fun onFinish() {
-                    bindingDistributionRoles.buttonTimer.callOnClick()
-                    finish()
-                    overridePendingTransition(R.anim.slide_left_to_right, R.anim.slide_right_to_left)
-                }
-            }.start()
+            countDownTimer.start()
         }
+    }
+
+    private val countDownTimer = object : CountDownTimer(10_000, 1_000) {
+        override fun onTick(millisUntilFinished: Long) {
+            val timeRemaining = (millisUntilFinished / 1000).toString()
+            bindingDistributionRoles.buttonTimer.text = timeRemaining
+        }
+        override fun onFinish() { bindingDistributionRoles.buttonTimer.callOnClick() }
     }
 }
